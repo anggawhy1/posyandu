@@ -6,21 +6,23 @@ use CodeIgniter\Model;
 
 class LansiaModel extends Model
 {
-    protected $table = 'tb_data_lansia_surobayan'; // Nama tabel
+    protected $table = 'tb_data_lansia_surobayan';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nik', 'nama', 'alamat', 'usia', 'jenis_kelamin']; // Sesuaikan dengan kolom tabel
+    protected $allowedFields = ['nik', 'nama', 'alamat', 'usia', 'jenis_kelamin'];
 
-    // Ambil semua data lansia
     public function getLansia($gender = null, $search = null)
     {
-        $builder = $this->db->table($this->table);
-        
+        $builder = $this->db->table($this->table)->select('id, nik, nama, alamat, usia, jenis_kelamin');
+
         if ($gender) {
             $builder->where('jenis_kelamin', $gender);
         }
 
         if ($search) {
-            $builder->like('nama', $search)->orLike('nik', $search);
+            $builder->groupStart()
+                ->like('nama', $search)
+                ->orLike('nik', $search)
+                ->groupEnd();
         }
 
         return $builder->get()->getResultArray();

@@ -42,6 +42,8 @@ $routes->get('/data-ibu-hamil', 'DataIbuHamil::index');
 $routes->post('/data-ibu-hamil/store', 'DataIbuHamil::store');
 $routes->get('home/testDB', 'Home::testDB');
 $routes->get('/admin/dashboard', 'Dashboard::index');
+$routes->get('/admin/data_lansia', 'LansiaController::index');
+$routes->get('/admin/data_ibu_hamil', 'IbuHamilController::index');
 
 
 

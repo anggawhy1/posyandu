@@ -7,113 +7,98 @@
         <a href="<?= base_url('/') ?>" class="text-primary font-semibold hover:text-green-600 transition duration-300 ease-in-out">
             Beranda
         </a> 
-        / Data Ibu Hamil
+        / Data Balita
     </nav>
 
     <div class="bg-white shadow-lg rounded-lg p-6">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Form Data Ibu Hamil</h2>
-        <form action="<?= base_url('/data-ibu-hamil/store') ?>" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="submitForm(event)">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Form Data Balita</h2>
+        <form action="<?= base_url('/data-balita/store') ?>" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="submitForm(event)">
 
-            <!-- NIK Ibu Hamil -->
+            
+            <!-- NIK Anak -->
             <div>
-                <label class="block text-gray-700 font-medium">NIK Ibu Hamil <span class="text-red-500">*</span></label>
-                <input type="text" name="nik" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">NIK Anak <span class="text-red-500">*</span></label>
+                <input type="text" name="nik_anak" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- Nama Ibu Hamil -->
+            <!-- Nama Anak -->
             <div>
-                <label class="block text-gray-700 font-medium">Nama Ibu Hamil <span class="text-red-500">*</span></label>
-                <input type="text" name="nama_ibu_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">Nama Anak <span class="text-red-500">*</span></label>
+                <input type="text" name="nama_anak" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- NIK Suami -->
+            <!-- Tanggal Lahir -->
             <div>
-                <label class="block text-gray-700 font-medium">NIK Suami <span class="text-red-500">*</span></label>
-                <input type="text" name="nik_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">Tanggal Lahir <span class="text-red-500">*</span></label>
+                <input type="date" name="tgl_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- Nama Suami -->
+            <!-- Jenis Kelamin -->
             <div>
-                <label class="block text-gray-700 font-medium">Nama Suami <span class="text-red-500">*</span></label>
-                <input type="text" name="nama_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Pekerjaan Ibu Hamil -->
-            <div>
-                <label class="block text-gray-700 font-medium">Pekerjaan Ibu Hamil <span class="text-red-500">*</span></label>
-                <input type="text" name="pekerjaan_ibu_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Pekerjaan Suami -->
-            <div>
-                <label class="block text-gray-700 font-medium">Pekerjaan Suami <span class="text-red-500">*</span></label>
-                <input type="text" name="pekerjaan_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Tanggal Mulai Hamil -->
-            <div>
-                <label class="block text-gray-700 font-medium">Tanggal Mulai Hamil <span class="text-red-500">*</span></label>
-                <input type="date" name="tgl_mulai_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Tanggal Perkiraan Lahir -->
-            <div>
-                <label class="block text-gray-700 font-medium">Tanggal Perkiraan Lahir <span class="text-red-500">*</span></label>
-                <input type="date" name="tgl_perkiraan_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Usia Kehamilan -->
-            <div>
-                <label class="block text-gray-700 font-medium">Usia Kehamilan (minggu) <span class="text-red-500">*</span></label>
-                <input type="number" name="usia_kehamilan" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-            </div>
-
-            <!-- Golongan Darah Ibu Hamil -->
-            <div>
-                <label class="block text-gray-700 font-medium">Golongan Darah Ibu Hamil <span class="text-red-500">*</span></label>
-                <select name="golDarah_ibu_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-                    <option value="">Pilih Golongan Darah</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="AB">AB</option>
-                    <option value="O">O</option>
+                <label class="block text-gray-700 font-medium">Jenis Kelamin <span class="text-red-500">*</span></label>
+                <select name="jenis_kelamin" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
                 </select>
             </div>
 
-            <!-- Golongan Darah Suami -->
+            <!-- Berat Badan Lahir -->
             <div>
-                <label class="block text-gray-700 font-medium">Golongan Darah Suami <span class="text-red-500">*</span></label>
-                <select name="golDarah_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
-                    <option value="">Pilih Golongan Darah</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="AB">AB</option>
-                    <option value="O">O</option>
+                <label class="block text-gray-700 font-medium">Berat Badan Lahir (kg) <span class="text-red-500">*</span></label>
+                <input type="number" step="0.1" name="berat_badan_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+            </div>
+
+            <!-- Panjang Badan Lahir -->
+            <div>
+                <label class="block text-gray-700 font-medium">Panjang Badan Lahir (cm) <span class="text-red-500">*</span></label>
+                <input type="number" step="0.1" name="panjang_badan_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+            </div>
+
+            <!-- Lingkar Kepala Lahir -->
+            <div>
+                <label class="block text-gray-700 font-medium">Lingkar Kepala Lahir (cm) <span class="text-red-500">*</span></label>
+                <input type="number" step="0.1" name="lingkar_kepala_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+            </div>
+
+            <!-- Premature / Mature -->
+            <div>
+                <label class="block text-gray-700 font-medium">Premature / Mature <span class="text-red-500">*</span></label>
+                <select class="w-full border border-gray-300 rounded-lg p-2 mt-1" name="premature_mature" required>
+                    <option value="">Pilih Status</option>
+                    <option value="Premature">Premature</option>
+                    <option value="Mature">Mature</option>
                 </select>
             </div>
 
-            <!-- Kadar HB -->
+            <!-- No KK -->
             <div>
-                <label class="block text-gray-700 font-medium">Kadar HB (g/dL) <span class="text-red-500">*</span></label>
-                <input type="number" step="0.1" name="kadar_hb" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">No KK <span class="text-red-500">*</span></label>
+                <input type="text" name="no_kk" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- Berat Badan Sebelum Hamil -->
+            <!-- NIK Ibu -->
             <div>
-                <label class="block text-gray-700 font-medium">Berat Badan Sebelum Hamil (kg) <span class="text-red-500">*</span></label>
-                <input type="number" step="0.1" name="bb_sebelum_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">NIK Ibu <span class="text-red-500">*</span></label>
+                <input type="text" name="nik_ibu" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- No Telepon -->
+            <!-- Nama Ibu -->
             <div>
-                <label class="block text-gray-700 font-medium">No Telepon <span class="text-red-500">*</span></label>
-                <input type="text" name="no_telepon" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+                <label class="block text-gray-700 font-medium">Nama Ibu <span class="text-red-500">*</span></label>
+                <input type="text" name="nama_ibu" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
-            <!-- Alamat -->
-            <div class="col-span-2">
-                <label class="block text-gray-700 font-medium">Alamat <span class="text-red-500">*</span></label>
-                <textarea name="alamat" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required></textarea>
+            <!-- NIK Ayah -->
+            <div>
+                <label class="block text-gray-700 font-medium">NIK Ayah <span class="text-red-500">*</span></label>
+                <input type="text" name="nik_ayah" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
+            </div>
+
+            <!-- Nama Ayah -->
+            <div>
+                <label class="block text-gray-700 font-medium">Nama Ayah <span class="text-red-500">*</span></label>
+                <input type="text" name="nama_ayah" class="w-full border border-gray-300 rounded-lg p-2 mt-1" required>
             </div>
 
             <div class="col-span-2 flex justify-end">
