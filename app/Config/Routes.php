@@ -35,7 +35,21 @@ $routes->post('/admin/jadwal/delete/(:num)', 'Jadwal::delete/$1'); // Hapus jadw
 $routes->get('/input-data', 'InputData::index');
 $routes->get('/data-balita', 'DataBalita::index');
 $routes->get('/data-remaja', 'DataRemaja::index');
+
 $routes->get('/data-ibu-hamil', 'DataIbuHamil::index');
+$routes->post('arsipkan-ibu-hamil', 'IbuHamilController::arsipkanIbuHamil');
+$routes->post('hapus-ibu-hamil', 'IbuHamilController::hapus');
+$routes->get('tambah-ibu-hamil', 'IbuHamilController::tambah');
+$routes->post('simpan-ibu-hamil', 'IbuHamilController::simpan');
+$routes->post('update-ibu-hamil', 'IbuHamilController::updateData');
+// $routes->post('update-ibu-hamil', 'IbuHamilController::updateIbuHamil');
+// $routes->get('search-ibu-hamil', 'IbuHamilController::searchIbuHamil');
+
+
+
+
+
+
 $routes->get('/data-usia-produktif', 'Home::dataUsiaProduktif');
 $routes->get('/kontak', 'Home::kontak');
 $routes->get('/login', 'Home::login');
