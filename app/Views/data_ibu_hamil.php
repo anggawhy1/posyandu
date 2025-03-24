@@ -1,6 +1,7 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
+
 <div class="container mx-auto px-6 py-6">
     <!-- Breadcrumb -->
     <nav class="text-gray-700 text-sm mb-4">
@@ -43,6 +44,54 @@
                 <input type="text" name="pekerjaan_ibu_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
             </div>
 
+            <!-- Pekerjaan Suami -->
+            <div>
+                <label class="block text-gray-700 font-medium">Pekerjaan Suami</label>
+                <input type="text" name="pekerjaan_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Tanggal Mulai Hamil -->
+            <div>
+                <label class="block text-gray-700 font-medium">Tanggal Mulai Hamil</label>
+                <input type="date" name="tgl_mulai_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Tanggal Perkiraan Lahir -->
+            <div>
+                <label class="block text-gray-700 font-medium">Tanggal Perkiraan Lahir</label>
+                <input type="date" name="tgl_perkiraan_lahir" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Usia Kehamilan -->
+            <div>
+                <label class="block text-gray-700 font-medium">Usia Kehamilan (minggu)</label>
+                <input type="number" name="usia_kehamilan" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Golongan Darah Ibu -->
+            <div>
+                <label class="block text-gray-700 font-medium">Golongan Darah Ibu</label>
+                <input type="text" name="golDarah_ibu_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Golongan Darah Suami -->
+            <div>
+                <label class="block text-gray-700 font-medium">Golongan Darah Suami</label>
+                <input type="text" name="golDarah_suami" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Kadar HB -->
+            <div>
+                <label class="block text-gray-700 font-medium">Kadar HB</label>
+                <input type="number" step="0.1" name="kadar_hb" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
+            <!-- Berat Badan Sebelum Hamil -->
+            <div>
+                <label class="block text-gray-700 font-medium">Berat Badan Sebelum Hamil (kg)</label>
+                <input type="number" step="0.1" name="bb_sebelum_hamil" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+            </div>
+
             <!-- Nomor Telepon -->
             <div>
                 <label class="block text-gray-700 font-medium">Nomor Telepon</label>
@@ -82,35 +131,24 @@
 
         fetch(form.action, {
             method: form.method,
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
+            body: new FormData(form)
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Response Data:", data); // Debugging
-
             if (data.success) {
                 document.getElementById("successModal").classList.remove("hidden");
                 setTimeout(() => { 
                     closeModal();
                     window.location.reload();
                 }, 2000);
-            } else {
-                alert("Gagal menyimpan data: " + (data.error || "Terjadi kesalahan."));
             }
-        })
-        .catch(error => {
-            console.error("Fetch error:", error);
-            alert("Terjadi kesalahan saat mengirim data!");
         });
     }
 
     function closeModal() {
-        console.log("Menutup modal..."); // Debugging
         document.getElementById("successModal").classList.add("hidden");
     }
 </script>
 
 <?= $this->endSection() ?>
+

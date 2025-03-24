@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\LansiaModel;
@@ -10,16 +11,15 @@ class LansiaController extends Controller
     {
         $model = new LansiaModel();
 
-        // Tangkap filter dari request GET
-        $gender = $this->request->getGet('gender') ?? ""; // Pastikan tidak null
-        $search = $this->request->getGet('search');
+        // Ambil query string dari input filter & search
+        $searchQuery = $this->request->getGet('search');
+        $selectedGender = $this->request->getGet('filterJK');
 
-        // Ambil data dari model
-        $data = [
-            'lansia' => $model->getLansia($gender, $search),
-            'selectedGender' => $gender // Kirim variabel ke View
-        ];
+        // Ambil data dari model berdasarkan filter
+        $data['lansia'] = $model->getLansia($searchQuery, $selectedGender);
+        $data['searchQuery'] = $searchQuery;
+        $data['selectedGender'] = $selectedGender;
 
-        return view('admin/data-lansia', $data);
+        return view('admin/data_lansia', $data);
     }
 }

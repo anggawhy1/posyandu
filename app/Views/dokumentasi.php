@@ -4,49 +4,38 @@
 <div class="container mx-auto px-6 py-6">
     <!-- Breadcrumb -->
     <nav class="text-gray-700 text-sm mb-4" aria-label="Breadcrumb">
-    <ol class="list-reset flex">
-        <li><a href="/" class="text-primary font-semibold hover:text-green-600 transition duration-300 ease-in-out">Home</a></li>
-        <li><span class="mx-2">/</span></li>
-        <li class="text-gray-500">Dokumentasi</li>
-    </ol>
-</nav>
+        <ol class="list-reset flex">
+            <li><a href="/" class="text-primary font-semibold hover:text-green-600 transition duration-300 ease-in-out">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li class="text-gray-500">Dokumentasi</li>
+        </ol>
+    </nav>
 
-    
-    <!-- Gallery Section -->
-    <h1 class="text-2xl font-bold mb-6 text-center">Dokumentasi Kegiatan</h1>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="/images/login.png" alt="Dokumentasi" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="font-semibold text-lg text-gray-800">12 Februari 2024 Posyandu Balita Windusari 3</h2>
-            </div>
-        </div>
+    <!-- Judul -->
+    <h1 class="text-2xl font-bold mb-6 text-center">Dokumentasi Posyandu</h1>
 
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="/images/login.png" alt="Dokumentasi" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="font-semibold text-lg text-gray-800">12 Februari 2024 Posyandu Balita Windusari 3</h2>
+    <!-- Galeri Dokumentasi -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <?php foreach ($dokumentasi as $item): ?>
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="<?= base_url('uploads/dokumentasi/' . $item['gambar']) ?>" alt="<?= $item['nama_dokumentasi'] ?>" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold"><?= $item['nama_dokumentasi'] ?></h2>
+                    <p class="text-gray-500 text-sm"><?= date('d M Y', strtotime($item['created_at'])) ?></p>
+                </div>
             </div>
-        </div>
-        
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="/images/login.png" alt="Dokumentasi" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="font-semibold text-lg text-gray-800">12 Februari 2024 Posyandu Balita Windusari 3</h2>
-            </div>
-        </div>
-
+        <?php endforeach; ?>
     </div>
-    
+
     <!-- Pagination -->
-    <div class="flex justify-center mt-6">
-        <nav class="inline-flex space-x-2" aria-label="Pagination">
-            <a href="#" class="px-3 py-1 bg-blue-600 text-white rounded-md">1</a>
-            <a href="#" class="px-3 py-1 bg-gray-200 text-gray-800 rounded-md hover:bg-blue-500 hover:text-white">2</a>
-            <a href="#" class="px-3 py-1 bg-gray-200 text-gray-800 rounded-md hover:bg-blue-500 hover:text-white">&gt;</a>
-        </nav>
+    <div class="mt-6 flex justify-center">
+        <?php 
+        $totalPages = ceil($totalData / $perPage);
+        for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?page=<?= $i ?>" class="mx-2 px-4 py-2 bg-blue-500 text-white rounded <?= $currentPage == $i ? 'bg-blue-700' : '' ?>">
+                <?= $i ?>
+            </a>
+        <?php endfor; ?>
     </div>
 </div>
 <?= $this->endSection() ?>

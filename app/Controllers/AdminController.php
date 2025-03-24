@@ -14,6 +14,11 @@ class AdminController extends BaseController
         return view('admin/data_balita');
     }
 
+    public function pemantauanBalita()
+    {
+        return view('admin/pemantauan_balita');
+    }
+
     public function dataLansia()
     {
         return view('admin/data_lansia');
@@ -33,5 +38,17 @@ class AdminController extends BaseController
     public function dataRemajaPutri()
     {
         return view('admin/data_remaja');
+    }
+    public function dataBaru()
+    {
+        return view('admin/data_baru');
+    }
+    public function riwayatData()
+    {
+        return view('admin/riwayat_data');
+    }
+    public function jadwal()
+    {
+        return view('admin/jadwal');
     }
 }

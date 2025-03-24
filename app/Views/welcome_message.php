@@ -106,7 +106,7 @@
                 <div class="bg-green-200 text-green-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-child text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">150</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4">118</p>
                 <p class="text-gray-600 text-lg">Data Balita</p>
             </div>
 
@@ -115,7 +115,7 @@
                 <div class="bg-yellow-200 text-yellow-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-user-friends text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">175</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4">214</p>
                 <p class="text-gray-600 text-lg">Data Lansia</p>
             </div>
 
@@ -133,7 +133,7 @@
                 <div class="bg-purple-200 text-purple-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-female text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">120</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4">0</p>
                 <p class="text-gray-600 text-lg">Data Remaja Putri</p>
             </div>
 
@@ -142,7 +142,7 @@
                 <div class="bg-blue-200 text-blue-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-briefcase text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">200</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4">987</p>
                 <p class="text-gray-600 text-lg">Data Usia Produktif</p>
             </div>
         </div>
@@ -152,7 +152,7 @@
 
 <section class="bg-white py-16">
     <div class="container mx-auto px-6">
-        <h3 class="text-lg font-semibold uppercase tracking-wider text-gray-700 text-center">Grafik Data Posyandu</h3>
+        <h3 class="text-lg font-semibold uppercase tracking-wider text-gray-700 text-center">Grafik Pengunjung Posyandu</h3>
         <h2 class="text-3xl font-bold text-gray-800 text-center mt-2">Tahun 2025</h2>
         
         <div class="flex justify-center mt-6">

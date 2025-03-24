@@ -7,42 +7,23 @@
 
     <!-- Kartu Statistik Total Data -->
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-        <?php
-        $dataKategori = [
-            ['label' => 'Balita', 'total' => $balita['total'] ?? 0, 'cewek' => $balita['perempuan'] ?? 0, 'cowok' => $balita['laki'] ?? 0, 'color' => 'blue'],
-            ['label' => 'Remaja Putri', 'total' => $remaja_putri['total'] ?? 0, 'cewek' => $remaja_putri['perempuan'] ?? 0, 'cowok' => $remaja_putri['laki'] ?? 0, 'color' => 'purple'],
-            ['label' => 'Ibu Hamil', 'total' => $ibu_hamil['total'] ?? 0, 'cewek' => $ibu_hamil['perempuan'] ?? 0, 'cowok' => $ibu_hamil['laki'] ?? 0, 'color' => 'green'],
-            ['label' => 'Lansia', 'total' => $lansia['total'] ?? 0, 'cewek' => $lansia['perempuan'] ?? 0, 'cowok' => $lansia['laki'] ?? 0, 'color' => 'red'],
-            ['label' => 'Usia Produktif', 'total' => $usia_produktif['total'] ?? 0, 'cewek' => $usia_produktif['perempuan'] ?? 0, 'cowok' => $usia_produktif['laki'] ?? 0, 'color' => 'yellow']
-        ];
-        ?>
-
         <?php foreach ($dataKategori as $kategori) : ?>
             <div class="bg-white shadow-lg rounded-lg p-4">
-                <h2 class="text-gray-600"><?= $kategori['label'] ?></h2>
-                <p class="text-3xl font-bold text-<?= $kategori['color'] ?>-600"><?= $kategori['total'] ?></p>
+                <h2 class="text-gray-600"><?= esc($kategori['label']) ?></h2>
+                <p class="text-3xl font-bold text-<?= esc($kategori['color']) ?>-600"><?= esc($kategori['total']) ?></p>
                 <div class="mt-2 text-sm text-gray-500">
-                    <p class="text-pink-500 font-semibold">♀ Perempuan: <?= $kategori['cewek'] ?></p>
-                    <p class="text-blue-500 font-semibold">♂ Laki-Laki: <?= $kategori['cowok'] ?></p>
+                    <p class="text-pink-500 font-semibold">♀ Perempuan: <?= esc($kategori['cewek']) ?></p>
+                    <p class="text-blue-500 font-semibold">♂ Laki-Laki: <?= esc($kategori['cowok']) ?></p>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
-</div>
-
-
-
-
-
-
-
-
 
 
 
     <!-- Statistik Pengunjung (Chart) -->
     <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Statistik Pengunjung (Jan - Apr 2025)</h2>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Statistik Pengunjung (Jan - Mar 2025)</h2>
         <div class="w-full h-64">
             <canvas id="statistikChart"></canvas>
         </div>
@@ -98,13 +79,24 @@
 
     <!-- Dokumentasi Kegiatan -->
     <div class="bg-white p-6 rounded-lg shadow mt-6">
-        <h2 class="text-lg font-semibold mb-3">Dokumentasi Terbaru</h2>
+        <div class="flex justify-between items-center mb-3">
+            <h2 class="text-lg font-semibold">Dokumentasi Terbaru</h2>
+            <a href="<?= base_url('admin/dokumentasi') ?>" class="text-blue-500 hover:underline">Lihat Semua</a>
+        </div>
+
         <div class="grid grid-cols-3 gap-4">
-            <img src="<?= base_url('uploads/dokumentasi1.jpg') ?>" class="rounded-lg">
-            <img src="<?= base_url('uploads/dokumentasi2.jpg') ?>" class="rounded-lg">
-            <img src="<?= base_url('uploads/dokumentasi3.jpg') ?>" class="rounded-lg">
+            <?php foreach ($dokumentasiTerbaru as $dok): ?>
+                <a href="<?= base_url('admin/dokumentasi') ?>">
+                    <img src="<?= base_url('uploads/dokumentasi/' . $dok['gambar']) ?>" alt="<?= $dok['nama_dokumentasi'] ?>" class="rounded-lg h-32 object-cover w-full">
+                </a>
+            <?php endforeach; ?>
+
+            <?php if (empty($dokumentasiTerbaru)): ?>
+                <p class="text-gray-500 col-span-3 text-center">Belum ada dokumentasi terbaru</p>
+            <?php endif; ?>
         </div>
     </div>
+
 </div>
 
 <!-- Chart.js -->
@@ -114,7 +106,7 @@
     var statistikChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Januari', 'Februari', 'Maret', 'April'],
+            labels: ['Januari', 'Februari', 'Maret'],
             datasets: [{
                     label: 'Balita',
                     data: [30, 35, 40, 45],

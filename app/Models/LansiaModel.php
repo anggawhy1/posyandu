@@ -10,19 +10,16 @@ class LansiaModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['nik', 'nama', 'alamat', 'usia', 'jenis_kelamin'];
 
-    public function getLansia($gender = null, $search = null)
+    public function getLansia($search = '', $gender = '')
     {
-        $builder = $this->db->table($this->table)->select('id, nik, nama, alamat, usia, jenis_kelamin');
+        $builder = $this->builder();
 
-        if ($gender) {
-            $builder->where('jenis_kelamin', $gender);
+        if (!empty($search)) {
+            $builder->like('nik', $search)->orLike('nama', $search);
         }
 
-        if ($search) {
-            $builder->groupStart()
-                ->like('nama', $search)
-                ->orLike('nik', $search)
-                ->groupEnd();
+        if (!empty($gender)) {
+            $builder->where('jenis_kelamin', $gender);
         }
 
         return $builder->get()->getResultArray();

@@ -15,9 +15,20 @@ class Home extends BaseController
         return view('dokumentasi');
     }
 
+
+    public function jadwal()
+    {
+        return view('jadwal');
+    }
+
     public function inputData()
     {
         return view('input_data');
+    }
+
+    public function pemantauanBalita()
+    {
+        return view('pemantauan_balita');
     }
 
     public function dataBalita()
@@ -25,10 +36,10 @@ class Home extends BaseController
         return view('data_balita');
     }
 
-    public function dataLansia()
-    {
-        return view('data_lansia');
-    }
+    // public function dataLansia()
+    // {
+    //     return view('data_lansia');
+    // }
 
     public function dataRemajaPutri()
     {

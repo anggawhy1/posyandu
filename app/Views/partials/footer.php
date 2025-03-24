@@ -15,10 +15,11 @@
         <div class="md:ml-6">
             <h3 class="text-lg font-semibold">Navigasi</h3>
             <ul class="mt-4 space-y-2">
-                <li><a href="#" class="text-gray-400 hover:text-white transition">Beranda</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition">Dokumentasi</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition">Input Data</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition">Hubungi Kami</a></li>
+                <li><a href="beranda" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+                <li><a href="dokumentasi" class="text-gray-400 hover:text-white transition">Dokumentasi</a></li>
+                <li><a href="beranda" class="text-gray-400 hover:text-white transition">Input Data</a></li>
+                <li><a href="jadwal" class="text-gray-400 hover:text-white transition">Jadwal</a></li>
+                <li><a href="kontak" class="text-gray-400 hover:text-white transition">Hubungi Kami</a></li>
             </ul>
         </div>
 
@@ -29,17 +30,17 @@
                 <i class="fas fa-map-marker-alt mr-2"></i> Pedukuhan Surobayan, Argomulyo
             </p>
             <p class="text-gray-400 mt-2">
-                <i class="fas fa-envelope mr-2"></i> info@posyanduargomulyo.com
+                <i class="fas fa-envelope mr-2"></i> posyandusurobayan@gmail.com
             </p>
             <p class="text-gray-400 mt-2">
-                <i class="fas fa-phone mr-2"></i> +62 812-3456-7890
+                <i class="fas fa-phone mr-2"></i> +62 858-0604-2201
             </p>
         </div>
     </div>
 
     <!-- Copyright -->
     <div class="text-center mt-10 text-gray-500 border-t border-gray-700 pt-6">
-        &copy; 2025 Posyandu Desa Argomulyo. Semua Hak Dilindungi.
+        &copy; 2025 Posyandu Nusa Indah. Semua Hak Dilindungi.
     </div>
 
     <script>

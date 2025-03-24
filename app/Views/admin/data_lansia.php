@@ -10,10 +10,10 @@
         <form method="GET" class="flex">
             <input type="text" name="search" id="search" class="border p-2 w-64"
                 placeholder="Cari Nama atau NIK..." value="<?= esc($searchQuery ?? '') ?>">
-            <select id="filterJK" class="border p-2 ml-2" onchange="filterGender()">
-                <option value="" <?= (isset($selectedGender) && $selectedGender == "") ? "selected" : "" ?>>Semua</option>
-                <option value="L" <?= (isset($selectedGender) && $selectedGender == "L") ? "selected" : "" ?>>Laki-laki</option>
-                <option value="P" <?= (isset($selectedGender) && $selectedGender == "P") ? "selected" : "" ?>>Perempuan</option>
+            <select name="filterJK" id="filterJK" class="border p-2 ml-2">
+                <option value="" <?= ($selectedGender == "") ? "selected" : "" ?>>Semua</option>
+                <option value="L" <?= ($selectedGender == "L") ? "selected" : "" ?>>Laki-laki</option>
+                <option value="P" <?= ($selectedGender == "P") ? "selected" : "" ?>>Perempuan</option>
             </select>
 
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 ml-2 rounded">Filter</button>

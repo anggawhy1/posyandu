@@ -3,14 +3,14 @@
         <!-- Logo -->
         <a href="/" class="text-primary font-bold text-xl flex items-center">
             <img src="images/logoo.png" alt="Logo" class="h-8 mr-2">
-            Posyandu
+            Posyandu Nusa Indah
         </a>
 
         <!-- MENU NAVBAR (Tampil di Desktop) -->
         <ul class="hidden md:flex space-x-6">
             <li><a href="<?= base_url('/') ?>" class="text-primary font-semibold hover:text-green-600 transition">Beranda</a></li>
             <li><a href="dokumentasi" class="text-primary font-semibold hover:text-green-600 transition">Dokumentasi</a></li>
-
+            <li><a href="jadwal" class="text-primary font-semibold hover:text-green-600 transition">Jadwal</a></li>
             <!-- DROPDOWN INPUT DATA -->
             <li class="relative group">
                 <a href="#" class="text-primary font-semibold hover:text-green-600 transition">Input Data</a>
@@ -49,7 +49,7 @@
             <li><a href="<?= base_url('/') ?>" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Home</a></li>
             <li><a href="berita-kesehatan" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Berita Kesehatan</a></li>
             <li><a href="dokumentasi" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Dokumentasi</a></li>
-            
+            <li><a href="jadwal" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Jadwal</a></li>
             <!-- DROPDOWN MENU MOBILE -->
             <li>
                 <button id="dropdownToggle" class="w-full text-left py-3 px-6 font-semibold text-black hover:bg-gray-100 flex justify-between items-center">

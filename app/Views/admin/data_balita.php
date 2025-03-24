@@ -4,10 +4,17 @@
 
 <div class="container mx-auto p-4">
     <h2 class="text-xl font-bold mb-4">Data Pemantauan Balita</h2>
-    
-    <!-- Search & Tambah Data -->
+
+    <!-- Filter & Tambah Data -->
     <div class="mb-4 flex justify-between">
-        <input type="text" id="search" class="border p-2 w-1/3" placeholder="Cari Nama Anak..." onkeyup="searchTable()">
+        <div>
+            <input type="text" id="search" class="border p-2 w-1/3" placeholder="Cari Nama Anak..." onkeyup="searchTable()">
+            <select id="genderFilter" class="border p-2 ml-2" onchange="filterGender()">
+                <option value="all">Semua</option>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+            </select>
+        </div>
         <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="addRow()">Tambah Data</button>
     </div>
 
@@ -16,121 +23,78 @@
         <table class="table-auto min-w-max w-full border-collapse border border-gray-400">
             <thead class="bg-gray-700 text-white">
                 <tr>
-                    <th class="border border-gray-500 p-2 text-center" rowspan="2">No</th>
-                    <th class="border border-gray-500 p-2 text-center" rowspan="2">Nama Anak</th>
-                    <th class="border border-gray-500 p-2 text-center" rowspan="2">Tanggal Lahir</th>
-                    <th class="border border-gray-500 p-2 text-center" rowspan="2">Nama Orang Tua</th>
-                    
-                    <!-- Header Tanggal -->
-                    <th class="border border-gray-500 p-2 text-center" colspan="6">20 Januari 2025</th>
-                    <th class="border border-gray-500 p-2 text-center" colspan="6">17 Februari 2025</th>
-                    <th class="border border-gray-500 p-2 text-center" colspan="6">16 Maret 2025</th>
-                    <th class="border border-gray-500 p-2 text-center" colspan="6">20 April 2025</th>
-                    <th class="border border-gray-500 p-2 text-center" colspan="6">18 Mei 2025</th>
-                    
-                    <th class="border border-gray-500 p-2 text-center" rowspan="2">Aksi</th>
-                </tr>
-                <tr class="bg-gray-600">
-                    <!-- Sub-header BB, TB, LILA, LK, Vit A, ASI -->
-                    <?php for ($i = 0; $i < 5; $i++) : ?>
-                        <th class="border border-gray-500 p-2 text-center">BB (kg)</th>
-                        <th class="border border-gray-500 p-2 text-center">TB (cm)</th>
-                        <th class="border border-gray-500 p-2 text-center">LILA</th>
-                        <th class="border border-gray-500 p-2 text-center">LK</th>
-                        <th class="border border-gray-500 p-2 text-center">Vit A</th>
-                        <th class="border border-gray-500 p-2 text-center">ASI</th>
-                    <?php endfor; ?>
+                    <th class="border border-gray-500 p-2 text-center">No</th>
+                    <th class="border border-gray-500 p-2 text-center">NIK Anak</th>
+                    <th class="border border-gray-500 p-2 text-center">Nama Anak</th>
+                    <th class="border border-gray-500 p-2 text-center">Tanggal Lahir</th>
+                    <th class="border border-gray-500 p-2 text-center">Jenis Kelamin</th>
+                    <th class="border border-gray-500 p-2 text-center">Berat Badan Lahir</th>
+                    <th class="border border-gray-500 p-2 text-center">Panjang Badan Lahir</th>
+                    <th class="border border-gray-500 p-2 text-center">Lingkar Kepala Lahir</th>
+                    <th class="border border-gray-500 p-2 text-center">Premature / Mature</th>
+                    <th class="border border-gray-500 p-2 text-center">No KK</th>
+                    <th class="border border-gray-500 p-2 text-center">NIK Ibu</th>
+                    <th class="border border-gray-500 p-2 text-center">Nama Ibu</th>
+                    <th class="border border-gray-500 p-2 text-center">NIK Ayah</th>
+                    <th class="border border-gray-500 p-2 text-center">Nama Ayah</th>
+                    <th class="border border-gray-500 p-2 text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody id="dataTable">
-                <tr class="bg-white">
-                    <td class="border border-gray-400 p-2 text-center">1</td>
-                    <td class="border border-gray-400 p-2" contenteditable="true">Raka</td>
-                    <td class="border border-gray-400 p-2" contenteditable="true">2020-09-02</td>
-                    <td class="border border-gray-400 p-2" contenteditable="true">Sri Utami</td>
-
-                    <!-- Dummy Data BB, TB, LILA, LK, Vit A, ASI -->
-                    <?php for ($i = 0; $i < 5; $i++) : ?>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">12,05</td>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">91,5</td>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">14</td>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">15</td>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">Ya</td>
-                        <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-                    <?php endfor; ?>
-
-                    <!-- Kolom Aksi -->
-                    <td class="border border-gray-400 p-2 text-center">
-                        <button class="bg-green-500 text-white px-3 py-1 rounded" onclick="updateRow(this)">Update</button>
-                        <button class="bg-red-500 text-white px-3 py-1 rounded" onclick="deleteRow(this)">Hapus</button>
-                    </td>
-                </tr>
+                <?php if (!empty($balita)): ?>
+                    <?php foreach ($balita as $index => $row): ?>
+                        <tr class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-green-100' ?>" data-gender="<?= $row['jenis_kelamin'] ?>">
+                            <td class="border border-gray-400 p-2 text-center"><?= $index + 1 ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nik_anak'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nama_anak'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['tgl_lahir'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['jenis_kelamin'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['berat_badan_lahir'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['panjang_badan_lahir'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['lingkar_kepala_lahir'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['premature_mature'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['no_kk'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nik_ibu'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nama_ibu'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nik_ayah'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center"><?= $row['nama_ayah'] ?></td>
+                            <td class="border border-gray-400 p-2 text-center">
+                                <button class="bg-green-500 text-white px-3 py-1 rounded" onclick="confirmUpdate(this)">Update</button>
+                                <button class="bg-red-500 text-white px-3 py-1 rounded" onclick="confirmDelete(this)">Hapus</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="15" class="border border-gray-400 p-2 text-center">Tidak ada data</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
-    // Fungsi Search Nama Anak
     function searchTable() {
         let input = document.getElementById("search").value.toLowerCase();
-        let table = document.getElementById("dataTable");
-        let rows = table.getElementsByTagName("tr");
-
-        for (let i = 0; i < rows.length; i++) {
-            let nameCell = rows[i].getElementsByTagName("td")[1]; // Kolom Nama Anak
-            if (nameCell) {
-                let nameText = nameCell.textContent || nameCell.innerText;
-                rows[i].style.display = nameText.toLowerCase().includes(input) ? "" : "none";
-            }
-        }
+        document.querySelectorAll("#dataTable tr").forEach(row => {
+            row.style.display = row.cells[2].textContent.toLowerCase().includes(input) ? "" : "none";
+        });
     }
 
-    // Tambah Baris
-    function addRow() {
-        let table = document.getElementById("dataTable");
-        let row = table.insertRow();
-        let rowCount = table.rows.length;
-        
-        row.className = rowCount % 2 === 0 ? "bg-green-100" : "bg-white";
-        row.innerHTML = `
-            <td class="border border-gray-400 p-2 text-center">${rowCount}</td>
-            <td class="border border-gray-400 p-2" contenteditable="true">Nama Baru</td>
-            <td class="border border-gray-400 p-2" contenteditable="true">2020-01-01</td>
-            <td class="border border-gray-400 p-2" contenteditable="true">Orang Tua</td>
-
-            ${`<td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-            <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-            <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-            <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-            <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>
-            <td class="border border-gray-400 p-2 text-center" contenteditable="true">-</td>`.repeat(5)}
-
-            <td class="border border-gray-400 p-2 text-center">
-                <button class="bg-green-500 text-white px-3 py-1 rounded" onclick="updateRow(this)">Update</button>
-                <button class="bg-red-500 text-white px-3 py-1 rounded" onclick="deleteRow(this)">Hapus</button>
-            </td>
-        `;
+    function filterGender() {
+        let filter = document.getElementById("genderFilter").value;
+        document.querySelectorAll("#dataTable tr").forEach(row => {
+            row.style.display = (filter === "all" || row.getAttribute("data-gender") === filter) ? "" : "none";
+        });
     }
 
-    // Hapus Baris
-    function deleteRow(button) {
-        let row = button.parentElement.parentElement;
-        row.parentNode.removeChild(row);
+    function confirmUpdate(button) {
+        alert("Data berhasil diperbarui!");
     }
 
-    // Update Baris (Sementara Hanya Console.log)
-    function updateRow(button) {
-        let row = button.parentElement.parentElement;
-        let cells = row.getElementsByTagName("td");
-        let data = [];
-        
-        for (let i = 1; i < cells.length - 1; i++) {  // Skip No & Aksi
-            data.push(cells[i].innerText.trim());
-        }
-
-        console.log("Data Updated:", data);
-        alert("Data berhasil diperbarui! (Simulasi)");
+    function confirmDelete(button) {
+        if (confirm("Hapus data ini?")) button.closest("tr").remove();
     }
 </script>
 
