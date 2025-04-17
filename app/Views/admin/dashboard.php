@@ -23,7 +23,7 @@
 
     <!-- Statistik Pengunjung (Chart) -->
     <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Statistik Pengunjung (Jan - Mar 2025)</h2>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Statistik Pengunjung 2025</h2>
         <div class="w-full h-64">
             <canvas id="statistikChart"></canvas>
         </div>

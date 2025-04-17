@@ -5,12 +5,36 @@
 <div class="container mx-auto p-4">
     <h2 class="text-xl font-bold mb-4">Data Ibu Hamil</h2>
 
-    <!-- Search & Tambah Data -->
-    <div class="mb-4 flex justify-between items-center">
-        <input type="text" id="searchInput" placeholder="Cari NIK atau Nama..."
-            class="border p-2 text-sm w-64 rounded focus:outline-none focus:ring focus:border-blue-300">
-        <a href="<?= base_url('tambah-ibu-hamil') ?>" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Data</a>
+    <!-- Search, Filter RT & Tambah Data -->
+    <div class="mb-4 flex flex-wrap gap-2 justify-between items-center">
+
+        <!-- Search + Filter -->
+        <form method="GET" class="flex flex-wrap gap-2">
+            <!-- Search NIK / Nama -->
+            <input type="text" name="search" id="searchInput"
+                placeholder="Cari NIK atau Nama..."
+                value="<?= esc($_GET['search'] ?? '') ?>"
+                class="border p-2 text-sm w-64 rounded focus:outline-none focus:ring focus:border-blue-300">
+
+            <!-- Filter RT -->
+            <select name="alamat" id="filterAlamat" class="border p-2 text-sm rounded">
+                <option value="">Semua RT</option>
+                <?php for ($i = 1; $i <= 10; $i++) : ?>
+                    <?php $rt = sprintf("Surobayan RT %02d", $i); ?>
+                    <option value="<?= $rt ?>" <?= ($_GET['alamat'] ?? '') === $rt ? 'selected' : '' ?>>
+                        <?= $rt ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+
+            <!-- Tombol Cari -->
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 text-sm rounded">Cari</button>
+        </form>
+
+        <!-- Tombah Data -->
+        <a href="<?= base_url('tambah-ibu-hamil') ?>" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">Tambah Data</a>
     </div>
+
 
 
     <!-- Table -->
@@ -38,145 +62,249 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($ibuHamil)) : ?>
-                    <?php foreach ($ibuHamil as $index => $row) : ?>
-                        <tr class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' ?>">
-                            <td class="border border-gray-400 p-2 text-center"><?= $index + 1 ?></td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik" value="<?= esc($row['nik']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_ibu_hamil" value="<?= esc($row['nama_ibu_hamil']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik_suami" value="<?= esc($row['nik_suami']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_suami" value="<?= esc($row['nama_suami']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_ibu_hamil" value="<?= esc($row['pekerjaan_ibu_hamil']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_suami" value="<?= esc($row['pekerjaan_suami']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_mulai_hamil" value="<?= esc($row['tgl_mulai_hamil']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_perkiraan_lahir" value="<?= esc($row['tgl_perkiraan_lahir']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="usia_kehamilan" value="<?= esc($row['usia_kehamilan']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_ibu_hamil" value="<?= esc($row['golDarah_ibu_hamil']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_suami" value="<?= esc($row['golDarah_suami']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="kadar_hb" value="<?= esc($row['kadar_hb']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="bb_sebelum_hamil" value="<?= esc($row['bb_sebelum_hamil']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="no_telepon" value="<?= esc($row['no_telepon']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="alamat" value="<?= esc($row['alamat']) ?>">
-                            </td>
-                            <td class="border border-gray-400 p-2 text-center">
-                                <button onclick="updateData(<?= $row['id'] ?>)" class="bg-green-500 text-white px-3 py-1 rounded">Update</button>
-                                <button onclick="hapusData(<?= $row['id'] ?>)" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
-                                <button onclick="showArsipModal(<?= $row['id'] ?>)" class="bg-yellow-500 text-white px-3 py-1 rounded">Arsipkan</button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="17" class="border border-gray-400 p-2 text-center">Tidak ada data</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+    <?php if (!empty($ibuHamil)) : ?>
+        <?php foreach ($ibuHamil as $index => $row) : ?>
+            <tr class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' ?>">
+                <td class="border border-gray-400 p-2 text-center"><?= $index + 1 ?></td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik" value="<?= esc($row['nik']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_ibu_hamil" value="<?= esc($row['nama_ibu_hamil']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik_suami" value="<?= esc($row['nik_suami']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_suami" value="<?= esc($row['nama_suami']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_ibu_hamil" value="<?= esc($row['pekerjaan_ibu_hamil']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_suami" value="<?= esc($row['pekerjaan_suami']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_mulai_hamil" value="<?= esc($row['tgl_mulai_hamil']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_perkiraan_lahir" value="<?= esc($row['tgl_perkiraan_lahir']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="usia_kehamilan" value="<?= esc($row['usia_kehamilan']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_ibu_hamil" value="<?= esc($row['golDarah_ibu_hamil']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_suami" value="<?= esc($row['golDarah_suami']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="kadar_hb" value="<?= esc($row['kadar_hb']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="bb_sebelum_hamil" value="<?= esc($row['bb_sebelum_hamil']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="no_telepon" value="<?= esc($row['no_telepon']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="alamat" value="<?= esc($row['alamat']) ?>">
+                </td>
+                <td class="border border-gray-400 p-2 text-center">
+                    <div class="flex gap-1 justify-center">
+                        <button onclick="updateData(<?= $row['id'] ?>)" id="update-btn-<?= $row['id'] ?>" class="bg-blue-500 text-white px-3 py-1 rounded hidden">Simpan</button>
+                        <button onclick="showArsipModal(<?= $row['id'] ?>)" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Arsip</button>
+                        <button onclick="hapusData(<?= $row['id'] ?>)" class="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded">Hapus</button>
+                        
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <tr>
+            <td colspan="17" class="border border-gray-400 p-2 text-center">Tidak ada data</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
+
 
         </table>
     </div>
 </div>
 
+<?php if (!empty($pager)) : ?>
+    <div class="mt-4 flex justify-center">
+        <nav class="pagination flex space-x-2">
+            <?= $pager->links('default', 'pagination_custom') ?>
+        </nav>
+    </div>
+<?php endif; ?>
 
 <!-- Modal Popup Sukses -->
 <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white p-6 rounded shadow-lg text-center">
-        <h2 class="text-lg font-semibold mb-4">Berhasil!</h2>
+        <h2 class="text-lg font-semibold mb-4">✅ Sukses!</h2>
         <p id="successMessage" class="mb-4"></p>
         <button onclick="closeSuccessModal()" class="bg-blue-500 text-white px-4 py-2 rounded">OK</button>
     </div>
 </div>
 
 
-<!-- Modal Arsip -->
-<div id="arsipModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded shadow-lg">
-        <h2 class="text-lg font-semibold mb-4">Pilih Kategori Arsip</h2>
+<!-- Modal Arsip (Styled seperti di bagian lansia) -->
+<div id="arsipModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">Pilih Kategori Arsip</h2>
         <input type="hidden" id="arsipId">
-        <select id="kategoriArsip" class="border p-2 w-full">
+        <select id="kategoriArsip" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
             <option value="meninggal">Meninggal</option>
             <option value="keguguran">Keguguran</option>
             <option value="melahirkan">Melahirkan</option>
         </select>
-        <div class="flex justify-end mt-4">
-            <button onclick="closeArsipModal()" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Batal</button>
-            <button onclick="submitArsip()" class="bg-blue-500 text-white px-4 py-2 rounded">OK</button>
+        <div class="flex justify-end mt-6 space-x-2">
+            <button onclick="closeArsipModal()" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md transition">Batal</button>
+            <button onclick="submitArsip()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition">Arsip</button>
         </div>
     </div>
 </div>
 
 
 
-<!-- Modal Konfirmasi -->
-<div id="confirmModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded shadow-lg text-center">
-        <h2 class="text-lg font-semibold mb-4" id="confirmMessage">Apakah Anda yakin?</h2>
-        <input type="hidden" id="confirmActionId">
-        <button onclick="closeConfirmModal()" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Batal</button>
-        <button id="confirmActionBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Ya, Lanjutkan</button>
+
+
+<!-- Modal Konfirmasi Arsip -->
+<div id="modalKonfirmasiArsip" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+        <h2 class="text-xl font-bold mb-4 text-gray-800">Konfirmasi Arsip Data</h2>
+        <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
+        <select id="kategoriArsip" class="w-full border-gray-300 rounded-md p-2 mb-4">
+            <option value="pindah">Pindah</option>
+            <option value="menikah">Menikah</option>
+            <option value="lainnya">Lainnya</option>
+        </select>
+        <div class="flex justify-end gap-2">
+            <button onclick="tutupModalArsip()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</button>
+            <button id="btnArsipKonfirmasi" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md">Ya, Arsipkan</button>
+        </div>
     </div>
 </div>
 
+
 <!-- Modal Sukses -->
-<div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded shadow-lg text-center">
-        <h2 class="text-lg font-semibold mb-4" id="successMessage">Berhasil!</h2>
-        <button onclick="closeSuccessModal()" class="bg-green-500 text-white px-4 py-2 rounded">OK</button>
+<div id="modalSuksesArsip" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6 text-center">
+        <h2 class="text-xl font-semibold mb-2 text-green-600"> ✅ Sukses!</h2>
+        <p class="text-gray-700 mb-4"> Data berhasil dipindahkan ke arsip.</p>
+        <button onclick="tutupModalSukses()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Tutup</button>
+    </div>
+</div>
+
+<!-- Modal Konfirmasi Hapus Balita -->
+<div id="modalKonfirmasiHapusIbuHamil" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+        <h2 class="text-xl font-bold mb-4 text-gray-800">Konfirmasi Hapus</h2>
+        <p class="mb-4 text-gray-600">Apakah kamu yakin ingin menghapus data balita ini? Tindakan ini tidak bisa dibatalkan.</p>
+        <div class="flex justify-end gap-2">
+            <button onclick="tutupModalHapusIbuHamil()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</button>
+            <button id="btnHapusKonfirmasiIbuHamil" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">Ya, Hapus</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sukses Hapus Balita -->
+<div id="modalSuksesHapusIbuHamil" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6 text-center">
+        <h2 class="text-xl font-semibold mb-2 text-green-600"> ✅ Sukses!</h2>
+        <p class="text-gray-700 mb-4">Data balita berhasil dihapus dari sistem.</p>
+        <button onclick="tutupModalSuksesHapusIbuHamil()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Tutup</button>
+    </div>
+</div>
+
+<!-- Modal Konfirmasi Update Balita -->
+<div id="modalKonfirmasiUpdateIbuHamil" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded p-6 w-96 text-center">
+        <p class="mb-4">Yakin ingin menyimpan perubahan data balita ini?</p>
+        <div class="flex justify-center gap-4">
+            <button id="batalUpdateIbuHamil" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
+            <button id="konfirmasiUpdateIbuHamil" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sukses Update Balita -->
+<div id="modalSuksesUpdateIbuHamil" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded p-6 w-96 text-center">
+        <h2 class="text-xl font-semibold mb-2 text-green-600"> ✅ Sukses!</h2>
+        <p class="text-gray-700 mb-4">Data berhasil diperbarui dari sistem.</p>
+        
+        <button id="closeModalSuksesUpdateIbuHamil" class="px-4 py-2 bg-green-600 text-white rounded">OK</button>
     </div>
 </div>
 
 
 <script>
-    function showConfirmModal(message, action, id) {
-        document.getElementById("confirmMessage").innerText = message;
-        document.getElementById("confirmActionId").value = id;
-        document.getElementById("confirmActionBtn").onclick = action;
-        document.getElementById("confirmModal").classList.remove("hidden");
+    // Fungsi Tampilkan Modal Sukses Arsip
+    function showSuccessArsipModal() {
+        document.getElementById("modalSuksesArsip").classList.remove("hidden");
     }
 
-    function closeConfirmModal() {
-        document.getElementById("confirmModal").classList.add("hidden");
-    }
-
-    function showSuccessModal(message) {
-        document.getElementById("successMessage").innerText = message;
-        document.getElementById("successModal").classList.remove("hidden");
-    }
-
-    function closeSuccessModal() {
-        document.getElementById("successModal").classList.add("hidden");
+    function tutupModalSukses() {
+        document.getElementById("modalSuksesArsip").classList.add("hidden");
         location.reload();
     }
-</script>
 
+    // Fungsi Tampilkan Modal Konfirmasi Hapus
+    function showConfirmDeleteModal(action) {
+        document.getElementById("modalKonfirmasiHapusIbuHamil").classList.remove("hidden");
+        const btnHapus = document.getElementById("btnHapusKonfirmasiIbuHamil");
+
+        // Unbind event listener sebelumnya
+        const newBtnHapus = btnHapus.cloneNode(true);
+        btnHapus.parentNode.replaceChild(newBtnHapus, btnHapus);
+
+        newBtnHapus.addEventListener("click", action);
+    }
+
+    function tutupModalHapusIbuHamil() {
+        document.getElementById("modalKonfirmasiHapusIbuHamil").classList.add("hidden");
+    }
+
+    function showSuccessDeleteModal() {
+        document.getElementById("modalSuksesHapusIbuHamil").classList.remove("hidden");
+    }
+
+    function tutupModalSuksesHapusIbuHamil() {
+        document.getElementById("modalSuksesHapusIbuHamil").classList.add("hidden");
+        location.reload();
+    }
+
+    // Fungsi Tampilkan Modal Konfirmasi Update
+    function showConfirmUpdateModal(action) {
+        document.getElementById("modalKonfirmasiUpdateIbuHamil").classList.remove("hidden");
+
+        const btnSimpan = document.getElementById("konfirmasiUpdateIbuHamil");
+        const btnBatal = document.getElementById("batalUpdateIbuHamil");
+
+        // Unbind event listener sebelumnya
+        const newBtnSimpan = btnSimpan.cloneNode(true);
+        btnSimpan.parentNode.replaceChild(newBtnSimpan, btnSimpan);
+
+        newBtnSimpan.addEventListener("click", action);
+
+        btnBatal.onclick = function() {
+            document.getElementById("modalKonfirmasiUpdateIbuHamil").classList.add("hidden");
+        }
+    }
+
+    function showSuccessUpdateModal() {
+        document.getElementById("modalSuksesUpdateIbuHamil").classList.remove("hidden");
+
+        document.getElementById("closeModalSuksesUpdateIbuHamil").onclick = function() {
+            document.getElementById("modalSuksesUpdateIbuHamil").classList.add("hidden");
+            location.reload();
+        }
+    }
+</script>
 
 <script>
     function showArsipModal(id) {
@@ -205,60 +333,63 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
-                    location.reload();
+                    closeArsipModal();
+                    showSuccessArsipModal();
                 } else {
                     alert("Gagal mengarsipkan: " + data.message);
                 }
             })
             .catch(error => {
+                console.error(error);
                 alert("Terjadi kesalahan. Cek konsol untuk detail.");
             });
     }
 
     function hapusData(id) {
-        showConfirmModal("Apakah Anda yakin ingin menghapus data ini?", function() {
+        showConfirmDeleteModal(function() {
             fetch("<?= base_url('hapus-ibu-hamil') ?>", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({
-                        id
-                    })
+                    body: JSON.stringify({ id })
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
-                        closeConfirmModal();
-                        showSuccessModal("Data berhasil dihapus!");
+                        tutupModalHapusIbuHamil();
+                        showSuccessDeleteModal();
                     } else {
                         alert("Gagal menghapus: " + data.message);
                     }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Terjadi kesalahan. Cek konsol.");
                 });
-        }, id);
+        });
     }
-</script>
 
-<script>
     function updateData(id) {
-        showConfirmModal("Apakah Anda yakin ingin memperbarui data ini?", function() {
+        showConfirmUpdateModal(function() {
             let inputs = document.querySelectorAll(`input[data-id='${id}']`);
-            let data = {
-                id: id
-            };
+            let data = { id: id };
+
+            let valid = true;
 
             inputs.forEach(input => {
                 let field = input.getAttribute("data-field");
                 let value = input.value.trim();
 
-                // Validasi NIK (harus angka & 16 digit)
                 if (field === "nik" && (!/^\d{16}$/.test(value))) {
                     alert("NIK harus 16 digit angka!");
-                    return;
+                    valid = false;
                 }
 
                 data[field] = value;
             });
+
+            if (!valid) return;
 
             fetch("<?= base_url('update-ibu-hamil') ?>", {
                     method: "POST",
@@ -270,27 +401,34 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
-                        closeConfirmModal();
-                        showSuccessModal("Data berhasil diperbarui!");
+                        document.getElementById("modalKonfirmasiUpdateIbuHamil").classList.add("hidden");
+                        showSuccessUpdateModal();
                     } else {
                         alert("Gagal memperbarui data: " + data.message);
                     }
                 })
                 .catch(error => {
+                    console.error(error);
                     alert("Terjadi kesalahan. Silakan coba lagi.");
                 });
-        }, id);
+        });
     }
 </script>
 
 <script>
+    // SEARCH: langsung filter baris tabel berdasarkan inputan user
     document.getElementById("searchInput").addEventListener("keyup", function() {
         let keyword = this.value.toLowerCase();
         let rows = document.querySelectorAll("tbody tr");
 
         rows.forEach(row => {
-            let nik = row.querySelector("td:nth-child(2) input").value.toLowerCase(); // Ambil dari input
-            let nama = row.querySelector("td:nth-child(3) input").value.toLowerCase(); // Ambil dari input
+            let nikInput = row.querySelector("td:nth-child(2) input");
+            let namaInput = row.querySelector("td:nth-child(3) input");
+
+            if (!nikInput || !namaInput) return;
+
+            let nik = nikInput.value.toLowerCase();
+            let nama = namaInput.value.toLowerCase();
 
             if (nik.includes(keyword) || nama.includes(keyword)) {
                 row.style.display = "";
@@ -299,7 +437,33 @@
             }
         });
     });
+
+    // TOMBOL SIMPAN MUNCUL SAAT ADA EDIT
+    document.querySelectorAll('.editable').forEach(input => {
+        const row = input.closest('tr');
+        const id = input.dataset.id;
+        const updateBtn = document.getElementById(`update-btn-${id}`);
+
+        input.dataset.original = input.value;
+
+        input.addEventListener('input', () => {
+            const hasChanges = Array.from(row.querySelectorAll('.editable')).some(inp => inp.value !== inp.dataset.original);
+            if (hasChanges) {
+                updateBtn.classList.remove('hidden');
+            } else {
+                updateBtn.classList.add('hidden');
+            }
+        });
+
+        input.addEventListener('blur', () => {
+            const hasChanges = Array.from(row.querySelectorAll('.editable')).some(inp => inp.value !== inp.dataset.original);
+            if (!hasChanges) {
+                updateBtn.classList.add('hidden');
+            }
+        });
+    });
 </script>
+
 
 
 

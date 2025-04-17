@@ -8,14 +8,13 @@ use CodeIgniter\Controller;
 class Dokumentasi extends Controller
 {
     protected $dokumentasiModel;
-    protected $perPage = 6; // Jumlah gambar per halaman
+    protected $perPage = 6;
 
     public function __construct()
     {
         $this->dokumentasiModel = new DokumentasiModel();
     }
 
-    // Halaman user melihat dokumentasi dengan pagination
     public function index()
     {
         $page = $this->request->getGet('page') ?? 1;
@@ -29,14 +28,12 @@ class Dokumentasi extends Controller
         return view('dokumentasi', $data);
     }
 
-    // Halaman admin untuk mengelola dokumentasi
     public function admin()
     {
         $data['dokumentasi'] = $this->dokumentasiModel->findAll();
         return view('admin/dokumentasi', $data);
     }
 
-    // Proses tambah dokumentasi baru
     public function store()
     {
         $file = $this->request->getFile('gambar');
@@ -44,10 +41,12 @@ class Dokumentasi extends Controller
             $newName = $file->getRandomName();
             $file->move('uploads/dokumentasi', $newName);
 
+            $tanggalInput = $this->request->getPost('tanggal') ?? date('Y-m-d');
+
             $data = [
                 'nama_dokumentasi' => $this->request->getPost('nama_dokumentasi'),
                 'gambar' => $newName,
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s', strtotime($tanggalInput)),
             ];
 
             $this->dokumentasiModel->tambahDokumentasi($data);
@@ -56,7 +55,6 @@ class Dokumentasi extends Controller
         return redirect()->to('/admin/dokumentasi')->with('success', 'Dokumentasi berhasil ditambahkan!');
     }
 
-    // Hapus dokumentasi
     public function delete($id)
     {
         $this->dokumentasiModel->hapusDokumentasi($id);
@@ -65,13 +63,12 @@ class Dokumentasi extends Controller
 
     public function create()
     {
-        return view('admin/tambah_dokumentasi'); // Buat view tambah_dokumentasi.php di folder views/admin/
+        return view('admin/tambah_dokumentasi');
     }
 
     public function edit($id)
     {
-        $dokumentasiModel = new DokumentasiModel();
-        $dokumentasi = $dokumentasiModel->find($id);
+        $dokumentasi = $this->dokumentasiModel->find($id);
 
         if (!$dokumentasi) {
             return redirect()->to('/admin/dokumentasi')->with('error', 'Data tidak ditemukan!');
@@ -82,27 +79,31 @@ class Dokumentasi extends Controller
 
     public function update($id)
     {
-        $dokumentasiModel = new DokumentasiModel();
         $data = [
             'nama_dokumentasi' => $this->request->getPost('nama_dokumentasi'),
+            'created_at' => $this->request->getPost('created_at') ?? date('Y-m-d H:i:s'),
         ];
+        
+       
 
-        // Cek apakah ada file gambar baru yang diunggah
+        $tanggalInput = $this->request->getPost('tanggal');
+        if ($tanggalInput) {
+            $data['created_at'] = date('Y-m-d H:i:s', strtotime($tanggalInput));
+        }
+
         $gambar = $this->request->getFile('gambar');
         if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
-            // Hapus gambar lama
-            $oldData = $dokumentasiModel->find($id);
-            if (file_exists('uploads/dokumentasi/' . $oldData['gambar'])) {
+            $oldData = $this->dokumentasiModel->find($id);
+            if ($oldData && file_exists('uploads/dokumentasi/' . $oldData['gambar'])) {
                 unlink('uploads/dokumentasi/' . $oldData['gambar']);
             }
 
-            // Simpan gambar baru
             $newName = $gambar->getRandomName();
             $gambar->move('uploads/dokumentasi', $newName);
             $data['gambar'] = $newName;
         }
 
-        $dokumentasiModel->update($id, $data);
+        $this->dokumentasiModel->update($id, $data);
         return redirect()->to('/admin/dokumentasi')->with('success', 'Dokumentasi berhasil diperbarui!');
     }
 }

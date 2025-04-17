@@ -24,7 +24,7 @@
             </li>
 
             <li><a href="kontak" class="text-primary font-semibold hover:text-green-600 transition">Hubungi Kami</a></li>
-            <li><a href="login" class="text-primary font-semibold hover:text-green-600 transition">Login</a></li>
+            <li><a href="login" class="text-primary font-semibold hover:text-green-600 transition">Masuk</a></li>
         </ul>
 
         <!-- TOMBOL HAMBURGER (Muncul di HP) -->
@@ -47,7 +47,6 @@
         <!-- Daftar Menu -->
         <ul class="mt-16 text-lg">
             <li><a href="<?= base_url('/') ?>" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Home</a></li>
-            <li><a href="berita-kesehatan" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Berita Kesehatan</a></li>
             <li><a href="dokumentasi" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Dokumentasi</a></li>
             <li><a href="jadwal" class="block py-3 px-6 font-semibold text-black hover:bg-gray-100">Jadwal</a></li>
             <!-- DROPDOWN MENU MOBILE -->

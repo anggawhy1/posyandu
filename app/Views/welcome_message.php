@@ -5,7 +5,7 @@
 <div class="flex flex-col lg:flex-row items-center lg:justify-between px-6 lg:px-20 py-3">
     <!-- Text Section -->
     <div class="lg:w-1/2 opacity-0 transform -translate-x-10 animate-fadeInLeft">
-        <h2 class="text-secondary text-lg font-semibold">Posyandu Pedukuhan Surobayan</h2>
+        <h2 class="hidden lg:block text-secondary text-lg font-semibold">Posyandu Pedukuhan Surobayan</h2>
         <h1 class="text-5xl lg:text-6xl font-extrabold text-primary leading-tight mt-2">
             Selamat Datang di Website Informasi Posyandu Nusa Indah
         </h1>
@@ -23,9 +23,17 @@
 <style>
     /* Animasi Floating (Naik-Turun) */
     @keyframes floating {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
     }
 
     .floating {
@@ -34,13 +42,27 @@
 
     /* Animasi Fade In dari Kiri dan Kanan */
     @keyframes fadeInLeft {
-        from { opacity: 0; transform: translateX(-50px); }
-        to { opacity: 1; transform: translateX(0); }
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     @keyframes fadeInRight {
-        from { opacity: 0; transform: translateX(50px); }
-        to { opacity: 1; transform: translateX(0); }
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .animate-fadeInLeft {
@@ -63,8 +85,8 @@
                     Posyandu NUSA INDAH
                 </h2>
                 <p class="text-gray-600 leading-relaxed mb-6">
-                    Posyandu Nusa Indah (Pedukuhan Surobayan) menyediakan layanan kesehatan yang lengkap, 
-                    termasuk pemeriksaan rutin untuk ibu hamil dan balita, program imunisasi, 
+                    Posyandu Nusa Indah (Pedukuhan Surobayan) menyediakan layanan kesehatan yang lengkap,
+                    termasuk pemeriksaan rutin untuk ibu hamil dan balita, program imunisasi,
                     konsultasi gizi, penyuluhan kesehatan, serta pemantauan pertumbuhan balita.
                 </p>
                 <ul class="space-y-4">
@@ -86,7 +108,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Konten Kanan (Gambar) -->
             <div class="flex justify-center">
                 <img src="images/two.png" alt="Ilustrasi Posyandu" class="w-3/4 md:w-2/3 drop-shadow-lg">
@@ -106,7 +128,7 @@
                 <div class="bg-green-200 text-green-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-child text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">118</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4"><?= esc($balita) ?></p>
                 <p class="text-gray-600 text-lg">Data Balita</p>
             </div>
 
@@ -115,7 +137,7 @@
                 <div class="bg-yellow-200 text-yellow-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-user-friends text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">214</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4"><?= esc($lansia) ?></p>
                 <p class="text-gray-600 text-lg">Data Lansia</p>
             </div>
 
@@ -124,7 +146,7 @@
                 <div class="bg-pink-200 text-pink-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-user-nurse text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">0</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4"><?= esc($ibu_hamil) ?></p>
                 <p class="text-gray-600 text-lg">Data Ibu Hamil</p>
             </div>
 
@@ -133,7 +155,7 @@
                 <div class="bg-purple-200 text-purple-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-female text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">0</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4"><?= esc($remaja_putri) ?></p>
                 <p class="text-gray-600 text-lg">Data Remaja Putri</p>
             </div>
 
@@ -142,7 +164,7 @@
                 <div class="bg-blue-200 text-blue-600 p-5 rounded-full shadow-md">
                     <i class="fas fa-briefcase text-4xl"></i>
                 </div>
-                <p class="text-4xl font-bold text-gray-800 mt-4">987</p>
+                <p class="text-4xl font-bold text-gray-800 mt-4"><?= esc($usia_produktif) ?></p>
                 <p class="text-gray-600 text-lg">Data Usia Produktif</p>
             </div>
         </div>
@@ -154,7 +176,7 @@
     <div class="container mx-auto px-6">
         <h3 class="text-lg font-semibold uppercase tracking-wider text-gray-700 text-center">Grafik Pengunjung Posyandu</h3>
         <h2 class="text-3xl font-bold text-gray-800 text-center mt-2">Tahun 2025</h2>
-        
+
         <div class="flex justify-center mt-6">
             <label for="yearFilter" class="mr-2 text-gray-700">Pilih Tahun:</label>
             <select id="yearFilter" class="border rounded px-3 py-1" onchange="updateChart()">
@@ -163,7 +185,7 @@
                 <option value="2023">2023</option>
             </select>
         </div>
- 
+
         <div class="mt-8">
             <canvas id="posyanduChart"></canvas>
         </div>
@@ -178,35 +200,56 @@
     function generateDummyData() {
         return {
             labels: ['Januari', 'Februari', 'Maret'],
-            datasets: [
-                { label: 'Data Balita', data: [50, 60, 40], backgroundColor: 'rgba(46, 204, 113, 0.5)' },
-                { label: 'Data Remaja Putri', data: [30, 45, 50], backgroundColor: 'rgba(155, 89, 182, 0.5)' },
-                { label: 'Data Lansia', data: [20, 25, 30], backgroundColor: 'rgba(241, 196, 15, 0.5)' },
-                { label: 'Data Usia Produktif', data: [70, 80, 75], backgroundColor: 'rgba(52, 152, 219, 0.5)' },
-                { label: 'Data Ibu Hamil', data: [10, 15, 12], backgroundColor: 'rgba(231, 76, 60, 0.5)' }
+            datasets: [{
+                    label: 'Data Balita',
+                    data: [50, 60, 40],
+                    backgroundColor: 'rgba(46, 204, 113, 0.5)'
+                },
+                {
+                    label: 'Data Remaja Putri',
+                    data: [30, 45, 50],
+                    backgroundColor: 'rgba(155, 89, 182, 0.5)'
+                },
+                {
+                    label: 'Data Lansia',
+                    data: [20, 25, 30],
+                    backgroundColor: 'rgba(241, 196, 15, 0.5)'
+                },
+                {
+                    label: 'Data Usia Produktif',
+                    data: [70, 80, 75],
+                    backgroundColor: 'rgba(52, 152, 219, 0.5)'
+                },
+                {
+                    label: 'Data Ibu Hamil',
+                    data: [10, 15, 12],
+                    backgroundColor: 'rgba(231, 76, 60, 0.5)'
+                }
             ]
         };
     }
 
     function updateChart() {
         const year = document.getElementById('yearFilter').value;
-        
+
         if (posyanduChart) {
             posyanduChart.destroy();
         }
-        
+
         posyanduChart = new Chart(ctx, {
             type: 'bar',
             data: generateDummyData(),
             options: {
                 responsive: true,
                 scales: {
-                    y: { beginAtZero: true }
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
         });
     }
-    
+
     document.addEventListener('DOMContentLoaded', updateChart);
 </script>
 

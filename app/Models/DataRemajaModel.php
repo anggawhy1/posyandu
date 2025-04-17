@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class DataRemajaModel extends Model
 {
-    protected $table = 'tb_data_remajaputri2025_surobayan';
+    protected $table = 'tb_data_baru_remaja_putri';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'nama_lengkap',

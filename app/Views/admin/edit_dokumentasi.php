@@ -11,6 +11,11 @@
         </div>
 
         <div class="mb-4">
+            <label class="block text-gray-700 font-semibold">Tanggal Dokumentasi</label>
+            <input type="datetime-local" name="created_at" class="w-full p-2 border rounded-lg" value="<?= date('Y-m-d\TH:i', strtotime($dokumentasi['created_at'])) ?>" required>
+        </div>
+
+        <div class="mb-4">
             <label class="block text-gray-700 font-semibold">Gambar Saat Ini</label>
             <img src="<?= base_url('uploads/dokumentasi/' . $dokumentasi['gambar']) ?>" alt="<?= $dokumentasi['nama_dokumentasi'] ?>" class="w-full h-48 object-cover rounded">
         </div>

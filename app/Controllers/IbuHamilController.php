@@ -15,20 +15,34 @@ class IbuHamilController extends Controller
     }
 
     public function index()
-    {
-        $searchQuery = $this->request->getGet('search');
+{
+    $model = new \App\Models\IbuHamilModel();
+    $searchQuery = $this->request->getGet('search');
+    $filterAlamat = $this->request->getGet('alamat');
 
-        $query = $this->ibuHamilModel;
+    $query = $this->ibuHamilModel;
 
-        if (!empty($searchQuery)) {
-            $query = $query->like('nik', $searchQuery)->orLike('nama_ibu_hamil', $searchQuery);
-        }
-
-        $data['ibuHamil'] = $query->findAll();
-        $data['searchQuery'] = $searchQuery;
-
-        return view('admin/data_ibu_hamil', $data);
+    if (!empty($searchQuery)) {
+        $query = $query->groupStart()
+                        ->like('nik', $searchQuery)
+                        ->orLike('nama_ibu_hamil', $searchQuery)
+                      ->groupEnd();
     }
+
+    if (!empty($filterAlamat)) {
+        $query = $query->where('alamat', $filterAlamat);
+    }
+
+    $data['ibuHamil'] = $query->findAll();
+    $data['searchQuery'] = $searchQuery;
+    $data['filterAlamat'] = $filterAlamat;
+    // Ambil 50 data per halaman
+    $data['ibuHamil'] = $model->paginate(25, 'default');
+    $data['pager'] = $model->pager;
+    return view('admin/data_ibu_hamil', $data);
+}
+
+
 
     public function arsipkanIbuHamil()
     {
@@ -73,36 +87,50 @@ class IbuHamilController extends Controller
 
 
     public function simpan()
-    {
-        $request = service('request');
+{
+    $request = service('request');
+    $db = \Config\Database::connect();
+    $builder = $db->table('tb_data_ibuhamil_surobayan');
 
-        $data = [
-            'nik' => $request->getPost('nik'),
-            'nama_ibu_hamil' => $request->getPost('nama_ibu_hamil'),
-            'nik_suami' => $request->getPost('nik_suami'),
-            'nama_suami' => $request->getPost('nama_suami'),
-            'pekerjaan_ibu_hamil' => $request->getPost('pekerjaan_ibu_hamil'),
-            'pekerjaan_suami' => $request->getPost('pekerjaan_suami'),
-            'tgl_mulai_hamil' => $request->getPost('tgl_mulai_hamil'),
-            'tgl_perkiraan_lahir' => $request->getPost('tgl_perkiraan_lahir'),
-            'usia_kehamilan' => $request->getPost('usia_kehamilan'),
-            'golDarah_ibu_hamil' => $request->getPost('golDarah_ibu_hamil'),
-            'golDarah_suami' => $request->getPost('golDarah_suami'),
-            'kadar_hb' => $request->getPost('kadar_hb'),
-            'bb_sebelum_hamil' => $request->getPost('bb_sebelum_hamil'),
-            'no_telepon' => $request->getPost('no_telepon'),
-            'alamat' => $request->getPost('alamat'),
-        ];
+    $nik = $request->getPost('nik');
 
-        $db = \Config\Database::connect();
-        $builder = $db->table('tb_data_ibuhamil_surobayan');
+    // Cek apakah NIK sudah ada
+    $cek = $builder->where('nik', $nik)->get()->getRow();
 
-        if ($builder->insert($data)) {
-            return view('admin/tambah_ibu_hamil', ['success' => true]);
-        } else {
-            return view('admin/tambah_ibu_hamil', ['error' => true]);
-        }
+    if ($cek) {
+        // Kalau NIK duplikat, kirim data inputan ke view biar ga kosong
+        return view('admin/tambah_ibu_hamil', [
+            'duplikat' => true,
+            'old' => $request->getPost() // <-- ini penting
+        ]);
     }
+    
+
+    $data = [
+        'nik' => $nik,
+        'nama_ibu_hamil' => $request->getPost('nama_ibu_hamil'),
+        'nik_suami' => $request->getPost('nik_suami'),
+        'nama_suami' => $request->getPost('nama_suami'),
+        'pekerjaan_ibu_hamil' => $request->getPost('pekerjaan_ibu_hamil'),
+        'pekerjaan_suami' => $request->getPost('pekerjaan_suami'),
+        'tgl_mulai_hamil' => $request->getPost('tgl_mulai_hamil'),
+        'tgl_perkiraan_lahir' => $request->getPost('tgl_perkiraan_lahir'),
+        'usia_kehamilan' => $request->getPost('usia_kehamilan'),
+        'golDarah_ibu_hamil' => $request->getPost('golDarah_ibu_hamil'),
+        'golDarah_suami' => $request->getPost('golDarah_suami'),
+        'kadar_hb' => $request->getPost('kadar_hb'),
+        'bb_sebelum_hamil' => $request->getPost('bb_sebelum_hamil'),
+        'no_telepon' => $request->getPost('no_telepon'),
+        'alamat' => $request->getPost('alamat'),
+    ];
+
+    if ($builder->insert($data)) {
+        return view('admin/tambah_ibu_hamil', ['success' => true]);
+    } else {
+        return view('admin/tambah_ibu_hamil', ['error' => true]);
+    }
+}
+
 
     public function updateData()
     {
@@ -132,6 +160,13 @@ class IbuHamilController extends Controller
                 "status" => "error",
                 "message" => "Gagal memperbarui data"
             ]);
+        }
+
+        // Cek duplikat NIK
+        $cek = $model->where('nik', $nik)->first();
+
+        if ($cek) {
+            return view('admin/tambah_ibu_hamil', ['duplikat' => true]);
         }
     }
 
