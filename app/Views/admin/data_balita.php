@@ -9,10 +9,19 @@
     <form method="GET" class="mb-4 flex flex-wrap gap-2 justify-between items-center">
         <div class="flex gap-2 items-center">
             <input type="text" name="search" class="border p-2" placeholder="Cari Nama atau NIK..." value="<?= esc(@$_GET['search']) ?>">
+
+            <select name="jenis_kelamin" id="filterJK" class="border p-2">
+                <option value="">Semua</option>
+                <option value="L" <?= ($_GET['jenis_kelamin'] ?? '') === "L" ? "selected" : "" ?>>Laki-laki</option>
+                <option value="P" <?= ($_GET['jenis_kelamin'] ?? '') === "P" ? "selected" : "" ?>>Perempuan</option>
+            </select>
+
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">Cari</button>
         </div>
         <a href="<?= base_url('/admin/databalita/tambah') ?>" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">Tambah Data</a>
     </form>
+
+    
 
     <!-- Table -->
     <div class="overflow-x-auto border rounded-lg shadow">

@@ -27,7 +27,7 @@ class BalitaModel extends Model
 
     protected $useTimestamps = true;
 
-    public function search($keyword, $rt = null)
+    public function search($keyword, $rt = null, $jenisKelamin = null)
     {
         $builder = $this;
 
@@ -38,6 +38,10 @@ class BalitaModel extends Model
 
         if ($rt) {
             $builder->where('alamat', $rt);
+        }
+
+        if ($jenisKelamin) {
+            $builder->where('jenis_kelamin', $jenisKelamin);
         }
 
         return $builder;

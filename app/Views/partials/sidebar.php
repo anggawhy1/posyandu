@@ -31,7 +31,7 @@
             <!-- Dropdown Kelola Data -->
             <li>
                 <button onclick="toggleDropdown('kelolaData')" class="w-full flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
-                    <i class="fas fa-database mr-3"></i> Kelola Data
+                    <i class="fas fa-layer-group mr-3"></i> Kelola Data
                     <i id="icon-kelolaData" class="fas fa-chevron-down ml-auto transition-transform duration-300"></i>
                 </button>
                 <ul id="dropdown-kelolaData" class="hidden pl-6 space-y-2">
@@ -73,7 +73,7 @@
             <!-- Dropdown Data Arsip -->
             <li>
                 <button onclick="toggleDropdown('dataArsip')" class="w-full flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
-                    <i class="fas fa-folder-open mr-3"></i> Data Arsip
+                    <i class="fas fa-archive mr-3"></i> Data Arsip
                     <i id="icon-dataArsip" class="fas fa-chevron-down ml-auto transition-transform duration-300"></i>
                 </button>
                 <ul id="dropdown-dataArsip" class="hidden pl-6 space-y-2">
@@ -93,13 +93,19 @@
 
             <li>
                 <a href="<?= base_url('admin/dokumentasi') ?>" class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
-                    <i class="fas fa-folder-open mr-3"></i> Dokumentasi
+                    <i class="fas fa-images mr-3"></i> Dokumentasi
                 </a>
             </li>
 
             <li>
                 <a href="<?= base_url('admin/jadwal') ?>" class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
-                    <i class="fas fa-folder-open mr-3"></i> Jadwal
+                    <i class="fas fa-calendar-alt mr-3"></i> Jadwal
+                </a>
+            </li>
+
+            <li>
+                <a href="<?= base_url('admin/jadwal') ?>" class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
+                    <i class="fas fa-print mr-3"></i> Cetak
                 </a>
             </li>
 

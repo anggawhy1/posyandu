@@ -54,7 +54,7 @@ class UsiaProduktifController extends Controller
     
         // Simpan ke tabel arsip lansia
         $db = db_connect();
-        $builder = $db->table('tb_arsip_lansia_surobayan');
+        $builder = $db->table('tb_arsip_usia_produktif');
     
         $builder->insert([
             'nik' => $data['nik'],
@@ -65,7 +65,7 @@ class UsiaProduktifController extends Controller
         ]);
     
         // Hapus dari tabel utama
-        $db->table('tb_data_lansia_surobayan')->delete(['id' => $data['id']]);
+        $db->table('tb_data_usia_produktif_surobayan')->delete(['id' => $data['id']]);
     
         return $this->response->setJSON(["message" => "Data berhasil diarsipkan!"]);
     }
@@ -73,7 +73,7 @@ class UsiaProduktifController extends Controller
     public function hapus($id)
     {
         $db = \Config\Database::connect();
-        $builder = $db->table('tb_data_lansia_surobayan');
+        $builder = $db->table('tb_data_usia_produktif_surobayan');
     
         $delete = $builder->delete(['id' => $id]);
     

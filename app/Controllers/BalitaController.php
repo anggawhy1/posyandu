@@ -20,9 +20,10 @@ class BalitaController extends Controller
         $keyword = $this->request->getGet('search');
         $rt = $this->request->getGet('rt');
         $perPage = 50;
+        $jenisKelamin = $this->request->getGet('jenis_kelamin');
 
         if ($keyword || $rt) {
-            $balitaBuilder = $this->balitaModel->search($keyword, $rt);
+            $balitaBuilder = $this->balitaModel->search($keyword, $rt, $jenisKelamin);
             $data['balita'] = $balitaBuilder->paginate($perPage, 'default');
         } else {
             $data['balita'] = $this->balitaModel->paginate($perPage, 'default');
