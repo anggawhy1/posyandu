@@ -201,7 +201,7 @@ $routes->get('admin/data-arsip-ibu-hamil', 'DataArsipIbuHamilController::arsip')
 $routes->post('admin/data-arsip-ibu-hamil/konfirmasi/(:num)', 'DataArsipIbuHamilController::konfirmasi/$1');
 $routes->delete('admin/data-arsip-ibu-hamil/hapus/(:num)', 'DataArsipIbuHamilController::hapus/$1');
 
-$routes->get('admin/data-arsip-remaja', 'DataArsipIbuHamilController::arsip'); 
+$routes->get('admin/data-arsip-remaja', 'DataArsipRemajaController::arsip'); 
 $routes->post('admin/data-arsip-remaja/konfirmasi/(:num)', 'DataArsipRemajaController::konfirmasi/$1');
 $routes->delete('admin/data-arsip-remaja/hapus/(:num)', 'DataArsipRemajaController::hapus/$1');
 
@@ -221,3 +221,13 @@ $routes->delete('admin/data-arsip-usia-produktif/hapus/(:num)', 'DataArsipUsiaPr
 // $routes->get('admin/data-arsip-lansia', 'Admin\DataArsipController::lansia');
 
 $routes->get('/', 'BerandaController::index');
+
+$routes->get('/admin/data-jumlah-hadir', 'DataHadirController::index');
+$routes->get('/admin/jumlah-balita-per-bulan', 'JumlahBalitaPerBulanController::index');
+$routes->post('/admin/jumlah-balita-per-bulan/save', 'JumlahBalitaPerBulanController::save');
+$routes->get('/admin/data-jumlah-hadir', 'DataHadirController::index');
+$routes->get('/admin/jumlah-lansia-per-bulan', 'JumlahLansiaPerBulanController::index');
+$routes->post('/admin/jumlah-lansia-per-bulan/save', 'JumlahLansiaPerBulanController::save');
+$routes->get('/admin/data-jumlah-hadir', 'DataHadirController::index');
+$routes->get('/admin/jumlah-remaja-per-bulan', 'JumlahRemajaPerBulanController::index');
+$routes->post('/admin/jumlah-remaja-per-bulan/save', 'JumlahRemajaPerBulanController::save');

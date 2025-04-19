@@ -8,7 +8,7 @@ use App\Models\RemajaPutriModel;
 
 class DataArsipRemajaController extends BaseController
 {
-    public function arsipp()
+    public function arsip()
     {
         $model = new ArsipRemajaModel();
 

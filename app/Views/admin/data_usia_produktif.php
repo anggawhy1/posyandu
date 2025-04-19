@@ -112,8 +112,10 @@
 
         <label class="block mb-2 font-semibold">Kategori Arsip</label>
         <select id="kategoriArsip" class="border p-2 w-full">
-            <option value="Pindah Posyandu">Pindah Posyandu</option>
+            <option value="Pindah">Pindah</option>
             <option value="Meninggal">Meninggal</option>
+            <option value="Lulus">Lulus</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
 
         <div class="flex justify-end mt-4">
@@ -192,6 +194,8 @@
                     alamat: this.getAttribute("data-alamat"),
                     usia: this.getAttribute("data-usia"),
                     jenis_kelamin: this.getAttribute("data-jenis-kelamin")
+                    
+
                 };
 
                 document.getElementById("infoArsip").innerText =

@@ -101,36 +101,33 @@
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    var ctx = document.getElementById('statistikChart').getContext('2d');
-    var statistikChart = new Chart(ctx, {
+<script> 
+    const ctx = document.getElementById('statistikChart').getContext('2d');
+    const statistikChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Januari', 'Februari', 'Maret'],
-            datasets: [{
+            labels: <?= json_encode($chartLabels) ?>,
+            datasets: [
+                {
                     label: 'Balita',
-                    data: [30, 35, 40, 45],
-                    backgroundColor: 'blue'
+                    data: <?= json_encode($dataBalita) ?>,
+                    backgroundColor: '#1D4ED8', // biru terang
+                    borderColor: '#1D4ED8',
+                    borderWidth: 1
                 },
                 {
                     label: 'Remaja Putri',
-                    data: [25, 30, 32, 33],
-                    backgroundColor: 'purple'
-                },
-                {
-                    label: 'Ibu Hamil',
-                    data: [8, 10, 7, 10],
-                    backgroundColor: 'green'
+                    data: <?= json_encode($dataRemaja) ?>,
+                    backgroundColor: '#7C3AED', // ungu terang
+                    borderColor: '#7C3AED',
+                    borderWidth: 1
                 },
                 {
                     label: 'Lansia',
-                    data: [20, 22, 18, 25],
-                    backgroundColor: 'red'
-                },
-                {
-                    label: 'Usia Produktif',
-                    data: [40, 45, 48, 50],
-                    backgroundColor: 'yellow'
+                    data: <?= json_encode($dataLansia) ?>,
+                    backgroundColor: '#D97706', // merah terang
+                    borderColor: '#D97706',
+                    borderWidth: 1
                 }
             ]
         },
@@ -141,9 +138,21 @@
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#000', // warna teks label
+                        font: {
+                            size: 12,     // ukuran font
+                            weight: 'normal' // normal, bukan bold
+                        }
+                    }
+                }
             }
         }
     });
 </script>
+
 
 <?= $this->endSection() ?>

@@ -2,12 +2,32 @@
 
 <?= $this->section('content') ?>
 <div class="p-6 bg-gray-100 min-h-screen">
-    <h1 class="text-2xl font-bold mb-4">Data Arsip dari Masyarakat</h1>
+    <h1 class="text-2xl font-bold mb-4">Data Arsip Usia Produktif </h1>
+
 
     <!-- Keterangan tentang data input masyarakat -->
-    <p class="text-gray-600 mb-4">
-        Ini adalah data yang diinput oleh masyarakat, yang telah diarsipkan untuk ditinjau lebih lanjut.
-    </p>
+    <div class="bg-white border-l-4 border-blue-500 p-4 mb-4 shadow rounded">
+        <p class="text-gray-700">
+            Halaman ini menampilkan data yang telah dipindahkan ke arsip.
+            Setiap data memiliki kategori arsip yang menunjukkan alasan pengarsipan, seperti
+            <span class="font-semibold text-blue-600">Pindah</span>,
+            <span class="font-semibold text-red-600">Meninggal</span>,
+            <span class="font-semibold text-green-600">Lulus</span>, atau
+            <span class="font-semibold text-yellow-600">Lainnya</span>.
+        </p>
+    </div>
+
+    <?php
+    $badgeColors = [
+        'meninggal'   => 'bg-red-200 text-red-800',
+        'pindah'      => 'bg-blue-200 text-blue-800',
+        'lulus'       => 'bg-green-200 text-green-800',
+        'keguguran'   => 'bg-pink-200 text-pink-800',
+        'melahirkan'  => 'bg-purple-200 text-purple-800',
+        'menikah'     => 'bg-orange-200 text-orange-800',
+        'lainnya'     => 'bg-yellow-200 text-yellow-800',
+    ];
+    ?>
 
     <?php if (!empty($usiaProduktif)) : ?>
         <div class="overflow-x-auto">
@@ -28,26 +48,22 @@
                     <?php foreach ($usiaProduktif as $index => $row): ?>
                         <tr data-id="<?= $row['id'] ?>" class="bg-white border">
                             <td class="p-2 border text-center"><?= $index + 1 ?></td>
-                            <?php foreach (
-                                [
-                                    'nik',
-                                    'nama',
-                                    'alamat',
-                                    'usia',
-                                    'jenis_kelamin',
-                                    'kategori',
-                                    
-                                ] as $field
-                            ): ?>
-                                <td class="p-2 border text-center">
-                                    <?= esc($row[$field]) ?>
-                                </td>
-                            <?php endforeach; ?>
+                            <td class="p-2 border text-center"><?= esc($row['nik']) ?></td>
+                            <td class="p-2 border text-center"><?= esc($row['nama']) ?></td>
+                            <td class="p-2 border text-center"><?= esc($row['alamat']) ?></td>
+                            <td class="p-2 border text-center"><?= esc($row['usia']) ?></td>
+                            <td class="p-2 border text-center"><?= esc($row['jenis_kelamin']) ?></td>
+                            <td class="p-2 border text-center">
+                                <?php
+                                $kategori = strtolower($row['kategori'] ?? 'lainnya');
+                                $badge = $badgeColors[$kategori] ?? $badgeColors['lainnya'];
+                                ?>
+                                <span class="px-2 py-1 rounded text-xs font-semibold <?= $badge ?>">
+                                    <?= ucfirst($kategori) ?>
+                                </span>
+                            </td>
                             <td class="p-2 border text-center flex justify-center space-x-2">
-                                <!-- Konfirmasi Button -->
                                 <button class="btn-konfirmasi bg-green-500 text-white px-4 py-2 rounded text-sm" data-id="<?= $row['id'] ?>">Pulihkan</button>
-
-                                <!-- Hapus Button -->
                                 <button class="btn-hapus bg-red-500 text-white px-4 py-2 rounded text-sm" data-id="<?= $row['id'] ?>">Hapus</button>
                             </td>
                         </tr>

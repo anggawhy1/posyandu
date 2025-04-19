@@ -80,9 +80,10 @@
         <h2 class="text-xl font-bold mb-4 text-gray-800">Konfirmasi Arsip Data</h2>
         <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
         <select id="kategoriArsip" class="w-full border-gray-300 rounded-md p-2 mb-4">
-            <option value="pindah">Pindah</option>
-            <option value="menikah">Menikah</option>
-            <option value="lainnya">Lainnya</option>
+            <option value="Pindah">Pindah</option>
+            <option value="Meninggal">Meninggal</option>
+            <option value="Lulus">Lulus</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
         <div class="flex justify-end gap-2">
             <button onclick="tutupModalArsip()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</button>

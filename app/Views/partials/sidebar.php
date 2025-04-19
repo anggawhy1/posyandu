@@ -28,6 +28,7 @@
                 </a>
             </li>
 
+
             <!-- Dropdown Kelola Data -->
             <li>
                 <button onclick="toggleDropdown('kelolaData')" class="w-full flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
@@ -66,6 +67,12 @@
                             <i class="fas fa-briefcase text-yellow-400 mr-3"></i> Data Usia Produktif
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= base_url('admin/data-jumlah-hadir') ?>" class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
+                            <i class="fas fa-user-check text-yellow-400 mr-3"></i> Jumlah Hadir
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 

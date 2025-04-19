@@ -177,14 +177,14 @@
         <h3 class="text-lg font-semibold uppercase tracking-wider text-gray-700 text-center">Grafik Pengunjung Posyandu</h3>
         <h2 class="text-3xl font-bold text-gray-800 text-center mt-2">Tahun 2025</h2>
 
-        <div class="flex justify-center mt-6">
+        <!-- <div class="flex justify-center mt-6">
             <label for="yearFilter" class="mr-2 text-gray-700">Pilih Tahun:</label>
             <select id="yearFilter" class="border rounded px-3 py-1" onchange="updateChart()">
                 <option value="2025" selected>2025</option>
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="mt-8">
             <canvas id="posyanduChart"></canvas>
@@ -193,69 +193,65 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<canvas id="posyanduChart" height="100"></canvas>
+
 <script>
     const ctx = document.getElementById('posyanduChart').getContext('2d');
-    let posyanduChart;
-
-    function generateDummyData() {
-        return {
-            labels: ['Januari', 'Februari', 'Maret'],
+    ctx.canvas.height = 380;
+    const posyanduChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?= json_encode($chartLabels) ?>,
             datasets: [{
-                    label: 'Data Balita',
-                    data: [50, 60, 40],
-                    backgroundColor: 'rgba(46, 204, 113, 0.5)'
+                    
+                label: 'Balita',
+                    data: <?= json_encode($dataBalita) ?>,
+                    backgroundColor: '#BFDBFE',
+                    borderColor: '#60A5FA',
+                    borderWidth: 1
                 },
                 {
-                    label: 'Data Remaja Putri',
-                    data: [30, 45, 50],
-                    backgroundColor: 'rgba(155, 89, 182, 0.5)'
+                    label: 'Remaja Putri',
+                    data: <?= json_encode($dataRemaja) ?>,
+                    backgroundColor: '#D8B4FE',
+                    borderColor: '#C084FC',
+                    borderWidth: 1
                 },
                 {
-                    label: 'Data Lansia',
-                    data: [20, 25, 30],
-                    backgroundColor: 'rgba(241, 196, 15, 0.5)'
+                    label: 'Lansia',
+                    data: <?= json_encode($dataLansia) ?>,
+                    backgroundColor: '#FDE68A',
+                    borderColor: '#FACC15',
+                    borderWidth: 1
                 },
-                {
-                    label: 'Data Usia Produktif',
-                    data: [70, 80, 75],
-                    backgroundColor: 'rgba(52, 152, 219, 0.5)'
-                },
-                {
-                    label: 'Data Ibu Hamil',
-                    data: [10, 15, 12],
-                    backgroundColor: 'rgba(231, 76, 60, 0.5)'
-                }
             ]
-        };
-    }
-
-    function updateChart() {
-        const year = document.getElementById('yearFilter').value;
-
-        if (posyanduChart) {
-            posyanduChart.destroy();
-        }
-
-        posyanduChart = new Chart(ctx, {
-            type: 'bar',
-            data: generateDummyData(),
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10 // Biar garis bantu lebih banyak, misal 10-10-10...
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 12,
+                            weight: 'normal'
+                        }
                     }
                 }
             }
-        });
-    }
+        }
 
-    document.addEventListener('DOMContentLoaded', updateChart);
+    });
 </script>
-
-<!-- visualisasi grafik -->
-
-
 
 
 <?= $this->endSection() ?>

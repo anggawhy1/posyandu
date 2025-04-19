@@ -2,12 +2,20 @@
 
 <?php echo $this->section('content') ?>
 <div class="p-6 bg-gray-100 min-h-screen">
-    <h1 class="text-2xl font-bold mb-4">Data Remaja Putri Baru dari Masyarakat</h1>
+    <h1 class="text-2xl font-bold mb-4">Data Arsip Remaja Putri</h1>
 
     <!-- Keterangan tentang data input masyarakat -->
-    <p class="text-gray-600 mb-4">
-        Ini adalah data yang diinput oleh masyarakat, yang perlu dikonfirmasi sebelum dipindahkan ke database utama.
-    </p>
+    <div class="bg-white border-l-4 border-blue-500 p-4 mb-4 shadow rounded">
+        <p class="text-gray-700">
+            Halaman ini menampilkan data yang telah dipindahkan ke arsip.
+            Setiap data memiliki kategori arsip yang menunjukkan alasan pengarsipan, seperti
+            <span class="font-semibold text-blue-600">Pindah</span>,
+            <span class="font-semibold text-red-600">Meninggal</span>,
+            <span class="font-semibold text-purple-600">Menikah</span>,
+            <span class="font-semibold text-green-600">Lulus</span>, atau
+            <span class="font-semibold text-yellow-600">Lainnya</span>.
+        </p>
+    </div>
 
     <?php if (!empty($remaja)) : ?>
         <div class="overflow-x-auto">
@@ -28,6 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $kategoriWarna = [
+                        'Meninggal'   => 'bg-red-200 text-red-800',
+                        'Pindah'      => 'bg-blue-200 text-blue-800',
+                        'Lulus'       => 'bg-green-200 text-green-800',
+                        'Keguguran'   => 'bg-gray-200 text-gray-800',
+                        'Melahirkan'  => 'bg-pink-200 text-pink-800',
+                        'Menikah'     => 'bg-purple-200 text-purple-800',
+                        'Lainnya'     => 'bg-yellow-200 text-yellow-800',
+                    ];
+                    ?>
                     <?php foreach ($remaja as $index => $row): ?>
                         <tr data-id="<?= $row['id'] ?>" class="bg-white border">
                             <td class="p-2 border text-center"><?= $index + 1 ?></td>
@@ -39,16 +58,24 @@
                                     'golongan_darah',
                                     'kadar_hb',
                                     'alamat',
-                                    'nomor_telepon',
-                                    'kategori_arsip',
+                                    'nomor_telepon'
                                 ] as $field
                             ): ?>
-                                <td class="p-2 border text-center edit-remaja" contenteditable="false" data-field="<?= $field ?>">
+                                <td class="p-2 border text-center">
                                     <?= esc($row[$field]) ?>
                                 </td>
                             <?php endforeach; ?>
+                            <td class="p-2 border text-center">
+                                <?php
+                                $kategori = $row['kategori_arsip'];
+                                $warna = $kategoriWarna[$kategori] ?? 'bg-gray-100 text-gray-800';
+                                ?>
+                                <span class="text-xs px-2 py-1 rounded font-semibold <?= $warna ?>">
+                                    <?= esc($kategori) ?>
+                                </span>
+                            </td>
                             <td class="p-2 border text-center flex justify-center space-x-2">
-                                
+
                                 <button class="btn-konfirmasi bg-green-500 text-white px-4 py-2 rounded text-sm">Konfirmasi</button>
                                 <button class="btn-hapus bg-red-500 text-white px-4 py-2 rounded text-sm">Hapus</button>
                             </td>
@@ -139,7 +166,7 @@
     let rowTerpilih = null;
     let simpanButtonAktif = null;
 
-    
+
     // ✅ FIXED: Tombol Konfirmasi pakai fetch, bukan href
     document.querySelectorAll(".btn-konfirmasi").forEach(button => {
         button.addEventListener("click", function() {

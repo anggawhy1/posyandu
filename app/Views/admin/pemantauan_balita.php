@@ -8,6 +8,12 @@
     <form method="GET" class="mb-4 flex flex-wrap gap-2 justify-between items-center">
         <div class="flex gap-2">
             <input type="text" name="search" id="searchInput" placeholder="Cari Nama Anak atau NIK..." value="<?= esc($_GET['search'] ?? '') ?>" class="border p-2 text-sm rounded focus:outline-none focus:ring focus:border-blue-300" />
+            <select name="jenis_kelamin" id="filterJK" class="border p-2">
+                <option value="">Semua</option>
+                <option value="L" <?= ($_GET['jenis_kelamin'] ?? '') === "L" ? "selected" : "" ?>>Laki-laki</option>
+                <option value="P" <?= ($_GET['jenis_kelamin'] ?? '') === "P" ? "selected" : "" ?>>Perempuan</option>
+            </select>
+
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Cari</button>
         </div>
         <a href="<?= base_url('admin/pemantauan-balita/tambah-bulan') ?>" class="bg-green-600 text-white px-4 py-2 rounded">+ Tambah Bulan</a>

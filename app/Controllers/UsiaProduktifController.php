@@ -61,7 +61,9 @@ class UsiaProduktifController extends Controller
             'nama' => $data['nama'],
             'alamat' => $data['alamat'],
             'usia' => $data['usia'],
-            'jenis_kelamin' => $data['jenis_kelamin']
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'kategori' => $data['kategori']
+            
         ]);
     
         // Hapus dari tabel utama

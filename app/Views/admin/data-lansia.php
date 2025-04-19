@@ -94,12 +94,13 @@
 
         <label class="block mb-2 font-semibold">Kategori Arsip</label>
         <select id="kategoriArsipLansia" class="border p-2 w-full">
-            <option value="Pindah Posyandu">Pindah Posyandu</option>
+            <option value="Pindah">Pindah</option>
             <option value="Meninggal">Meninggal</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
 
         <div class="flex justify-end mt-4">
-            <button id="closeModalLansia" class="bg-gray-500 text-white px-3 py-1 rounded mr-2">Batal</button>
+            <button id="closeModalLansia" class="bg-gray-500 hover:bg-gray-700  text-white px-3 py-1 rounded mr-2">Batal</button>
             <button id="confirmArsipLansia" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Arsipkan</button>
         </div>
     </div>

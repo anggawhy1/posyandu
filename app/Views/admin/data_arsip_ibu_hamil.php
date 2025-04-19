@@ -2,12 +2,33 @@
 
 <?php echo $this->section('content') ?>
 <div class="p-6 bg-gray-100 min-h-screen">
-    <h1 class="text-2xl font-bold mb-4">Data Ibu Hamil Baru dari Masyarakat</h1>
+    <h1 class="text-2xl font-bold mb-4">Data Arsip Ibu Hamil</h1>
 
     <!-- Keterangan tentang data input masyarakat -->
-    <p class="text-gray-600 mb-4">
-        Ini adalah data yang diinput oleh masyarakat, yang perlu dikonfirmasi sebelum dipindahkan ke database utama.
-    </p>
+    <div class="bg-white border-l-4 border-blue-500 p-4 mb-4 shadow rounded">
+        <p class="text-gray-700">
+            Halaman ini menampilkan data yang telah dipindahkan ke arsip.
+            Setiap data memiliki kategori arsip yang menunjukkan alasan pengarsipan, seperti
+            <span class="font-semibold text-blue-600">Pindah</span>,
+            <span class="font-semibold text-red-600">Meninggal</span>,
+            <span class="font-semibold text-pink-600">Melahirkan</span>,
+            <span class="font-semibold text-gray-600">Keguguran</span>, atau
+            <span class="font-semibold text-yellow-600">Lainnya</span>.
+        </p>
+    </div>
+
+    <?php
+    $kategoriColors = [
+        'meninggal'   => 'bg-red-200 text-red-800',
+        'pindah'      => 'bg-blue-200 text-blue-800',
+        'lulus'       => 'bg-green-200 text-green-800',
+        'keguguran'   => 'bg-gray-200 text-gray-800',
+        'melahirkan'  => 'bg-pink-200 text-pink-800',
+        'menikah'     => 'bg-orange-200 text-orange-800',
+        'lainnya'     => 'bg-yellow-200 text-yellow-800',
+    ];
+    ?>
+
 
     <?php if (!empty($ibuHamil)) : ?>
         <div class="overflow-x-auto">
@@ -55,14 +76,20 @@
                                     'kadar_hb',
                                     'bb_sebelum_hamil',
                                     'no_telepon',
-                                    'alamat',
-                                    'kategori_arsip'
+                                    'alamat'
                                 ] as $field
                             ): ?>
-                                <td class="p-2 border text-center edit-ibu-hamil" contenteditable="false" data-field="<?= $field ?>">
-                                    <?= esc($row[$field]) ?>
-                                </td>
+                                <td class="p-2 border text-center"> <?= esc($row[$field]) ?> </td>
                             <?php endforeach; ?>
+                            <td class="p-2 border text-center">
+                                <?php
+                                $kategori = strtolower($row['kategori_arsip']);
+                                $badge = $kategoriColors[$kategori] ?? 'bg-gray-200 text-gray-800';
+                                ?>
+                                <span class="px-2 py-1 text-xs font-semibold rounded <?= $badge ?>">
+                                    <?= esc(ucwords($row['kategori_arsip'])) ?>
+                                </span>
+                            </td>
                             <td class="p-2 border text-center flex justify-center space-x-2">
                                 <button class="btn-konfirmasi bg-green-500 text-white px-4 py-2 rounded text-sm">Pulihkan</button>
                                 <button class="btn-hapus bg-red-500 text-white px-4 py-2 rounded text-sm">Hapus</button>
@@ -106,7 +133,7 @@
             </div>
         </div>
 
-        
+
 
         <!-- Modal Sukses Konfirmasi -->
         <div id="modalSuksesKonfirmasi" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

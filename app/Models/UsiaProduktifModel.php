@@ -8,7 +8,7 @@ class UsiaProduktifModel extends Model
 {
     protected $table = 'tb_data_usia_produktif_surobayan';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nik', 'nama', 'alamat', 'usia', 'jenis_kelamin'];
+    protected $allowedFields = ['nik', 'nama', 'alamat', 'usia', 'jenis_kelamin', 'kategori'];
 
     public function getFilteredData($search = null, $alamat = null, $jenisKelamin = null, $perPage = 50, $page = 1)
     {

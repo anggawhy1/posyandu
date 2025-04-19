@@ -62,71 +62,71 @@
                 </tr>
             </thead>
             <tbody>
-    <?php if (!empty($ibuHamil)) : ?>
-        <?php foreach ($ibuHamil as $index => $row) : ?>
-            <tr class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' ?>">
-                <td class="border border-gray-400 p-2 text-center"><?= $index + 1 ?></td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik" value="<?= esc($row['nik']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_ibu_hamil" value="<?= esc($row['nama_ibu_hamil']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik_suami" value="<?= esc($row['nik_suami']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_suami" value="<?= esc($row['nama_suami']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_ibu_hamil" value="<?= esc($row['pekerjaan_ibu_hamil']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_suami" value="<?= esc($row['pekerjaan_suami']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_mulai_hamil" value="<?= esc($row['tgl_mulai_hamil']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_perkiraan_lahir" value="<?= esc($row['tgl_perkiraan_lahir']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="usia_kehamilan" value="<?= esc($row['usia_kehamilan']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_ibu_hamil" value="<?= esc($row['golDarah_ibu_hamil']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_suami" value="<?= esc($row['golDarah_suami']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="kadar_hb" value="<?= esc($row['kadar_hb']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="bb_sebelum_hamil" value="<?= esc($row['bb_sebelum_hamil']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="no_telepon" value="<?= esc($row['no_telepon']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
-                    <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="alamat" value="<?= esc($row['alamat']) ?>">
-                </td>
-                <td class="border border-gray-400 p-2 text-center">
-                    <div class="flex gap-1 justify-center">
-                        <button onclick="updateData(<?= $row['id'] ?>)" id="update-btn-<?= $row['id'] ?>" class="bg-blue-500 text-white px-3 py-1 rounded hidden">Simpan</button>
-                        <button onclick="showArsipModal(<?= $row['id'] ?>)" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Arsip</button>
-                        <button onclick="hapusData(<?= $row['id'] ?>)" class="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded">Hapus</button>
-                        
-                    </div>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else : ?>
-        <tr>
-            <td colspan="17" class="border border-gray-400 p-2 text-center">Tidak ada data</td>
-        </tr>
-    <?php endif; ?>
-</tbody>
+                <?php if (!empty($ibuHamil)) : ?>
+                    <?php foreach ($ibuHamil as $index => $row) : ?>
+                        <tr class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' ?>">
+                            <td class="border border-gray-400 p-2 text-center"><?= $index + 1 ?></td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik" value="<?= esc($row['nik']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_ibu_hamil" value="<?= esc($row['nama_ibu_hamil']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nik_suami" value="<?= esc($row['nik_suami']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="nama_suami" value="<?= esc($row['nama_suami']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_ibu_hamil" value="<?= esc($row['pekerjaan_ibu_hamil']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="pekerjaan_suami" value="<?= esc($row['pekerjaan_suami']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_mulai_hamil" value="<?= esc($row['tgl_mulai_hamil']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="tgl_perkiraan_lahir" value="<?= esc($row['tgl_perkiraan_lahir']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="usia_kehamilan" value="<?= esc($row['usia_kehamilan']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_ibu_hamil" value="<?= esc($row['golDarah_ibu_hamil']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="golDarah_suami" value="<?= esc($row['golDarah_suami']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="kadar_hb" value="<?= esc($row['kadar_hb']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="bb_sebelum_hamil" value="<?= esc($row['bb_sebelum_hamil']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="no_telepon" value="<?= esc($row['no_telepon']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center hover:bg-blue-100">
+                                <input type="text" class="w-full bg-transparent text-center editable" data-id="<?= $row['id'] ?>" data-field="alamat" value="<?= esc($row['alamat']) ?>">
+                            </td>
+                            <td class="border border-gray-400 p-2 text-center">
+                                <div class="flex gap-1 justify-center">
+                                    <button onclick="updateData(<?= $row['id'] ?>)" id="update-btn-<?= $row['id'] ?>" class="bg-blue-500 text-white px-3 py-1 rounded hidden">Simpan</button>
+                                    <button onclick="showArsipModal(<?= $row['id'] ?>)" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Arsip</button>
+                                    <button onclick="hapusData(<?= $row['id'] ?>)" class="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded">Hapus</button>
+
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="17" class="border border-gray-400 p-2 text-center">Tidak ada data</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
 
 
         </table>
@@ -155,15 +155,18 @@
 <div id="arsipModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">Pilih Kategori Arsip</h2>
+        <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
         <input type="hidden" id="arsipId">
         <select id="kategoriArsip" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <option value="meninggal">Meninggal</option>
-            <option value="keguguran">Keguguran</option>
-            <option value="melahirkan">Melahirkan</option>
+            <option value="Pindah">Pindah</option>
+            <option value="Meninggal">Meninggal</option>
+            <option value="Keguguran">Keguguran</option>
+            <option value="Melahirkan">Melahirkan</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
         <div class="flex justify-end mt-6 space-x-2">
             <button onclick="closeArsipModal()" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md transition">Batal</button>
-            <button onclick="submitArsip()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition">Arsip</button>
+            <button onclick="submitArsip()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition">Ya, Arsipkan</button>
         </div>
     </div>
 </div>
@@ -172,22 +175,24 @@
 
 
 
-<!-- Modal Konfirmasi Arsip -->
+<!-- Modal Konfirmasi Arsip
 <div id="modalKonfirmasiArsip" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <h2 class="text-xl font-bold mb-4 text-gray-800">Konfirmasi Arsip Data</h2>
         <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
         <select id="kategoriArsip" class="w-full border-gray-300 rounded-md p-2 mb-4">
-            <option value="pindah">Pindah</option>
-            <option value="menikah">Menikah</option>
-            <option value="lainnya">Lainnya</option>
+            <option value="Pindah">Pindah</option>
+            <option value="Menikah">Meninggal</option>
+            <option value="Keguguran">Keguguran</option>
+            <option value="Melahirkan">Melahirkan</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
         <div class="flex justify-end gap-2">
             <button onclick="tutupModalArsip()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</button>
             <button id="btnArsipKonfirmasi" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md">Ya, Arsipkan</button>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- Modal Sukses -->
@@ -236,7 +241,7 @@
     <div class="bg-white rounded p-6 w-96 text-center">
         <h2 class="text-xl font-semibold mb-2 text-green-600"> ✅ Sukses!</h2>
         <p class="text-gray-700 mb-4">Data berhasil diperbarui dari sistem.</p>
-        
+
         <button id="closeModalSuksesUpdateIbuHamil" class="px-4 py-2 bg-green-600 text-white rounded">OK</button>
     </div>
 </div>
@@ -352,7 +357,9 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ id })
+                    body: JSON.stringify({
+                        id
+                    })
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -373,7 +380,9 @@
     function updateData(id) {
         showConfirmUpdateModal(function() {
             let inputs = document.querySelectorAll(`input[data-id='${id}']`);
-            let data = { id: id };
+            let data = {
+                id: id
+            };
 
             let valid = true;
 
