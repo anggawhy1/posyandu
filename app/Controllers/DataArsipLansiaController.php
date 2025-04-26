@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ArsiplansiaModel;
+use App\Models\ArsipLansiaModel;
 use App\Models\LansiaModel;
 
 class DataArsipLansiaController extends BaseController
