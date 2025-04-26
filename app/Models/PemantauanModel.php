@@ -87,4 +87,15 @@ class PemantauanModel extends Model
 
         return $bulanKosong;
     }
+
+    public function getFilteredData($search = null, $jenisKelamin = null, $perPage = 50, $page = 1)
+{
+    $builder = $this->table('tb_data_balita2025_surobayan');  // Gunakan tabel asli tb_data_balita2025_surobayan
+
+    if ($jenisKelamin) {
+        $builder->where('jenis_kelamin', $jenisKelamin);
+    }
+    return $builder->paginate($perPage, 'default', $page);
+}
+
 }

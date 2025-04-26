@@ -47,22 +47,42 @@ class BalitaModel extends Model
         return $builder;
     }
 
-    public function arsipkan($id, $kategori)
-{
-    $data = $this->find($id);
-    if (!$data) return false;
+    public function getDataFiltered($jk = '', $keyword = '')
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tb_data_balita2025_surobayan');
 
-    unset($data['id']);
-    $data['kategori_arsip'] = $kategori;
-    $data['created_at'] = date('Y-m-d H:i:s');
+        if ($jk !== '') {
+            $builder->where('jenis_kelamin', $jk);
+        }
 
-    $inserted = $this->db->table('tb_arsip_balita2025')->insert($data);
+        if ($keyword !== '') {
+            $builder->groupStart()
+                ->like('nik_anak', $keyword)
+                ->orLike('nama_anak', $keyword)
+                ->groupEnd();
+        }
 
-    if ($inserted) {
-        return $this->delete($id);
+        return $builder->get()->getResultArray();
     }
 
-    return false;
-}
 
+
+    public function arsipkan($id, $kategori)
+    {
+        $data = $this->find($id);
+        if (!$data) return false;
+
+        unset($data['id']);
+        $data['kategori_arsip'] = $kategori;
+        $data['created_at'] = date('Y-m-d H:i:s');
+
+        $inserted = $this->db->table('tb_arsip_balita2025')->insert($data);
+
+        if ($inserted) {
+            return $this->delete($id);
+        }
+
+        return false;
+    }
 }

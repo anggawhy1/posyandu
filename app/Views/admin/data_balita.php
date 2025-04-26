@@ -5,23 +5,26 @@
 <div class="container mx-auto p-4">
     <h2 class="text-xl font-bold mb-4">Data Balita</h2>
 
-    <!-- Search + Tambah -->
     <form method="GET" class="mb-4 flex flex-wrap gap-2 justify-between items-center">
         <div class="flex gap-2 items-center">
-            <input type="text" name="search" class="border p-2" placeholder="Cari Nama atau NIK..." value="<?= esc(@$_GET['search']) ?>">
 
-            <select name="jenis_kelamin" id="filterJK" class="border p-2">
+            <input type="text" name="search" id="searchInput" placeholder="Cari NIK / Nama"
+                value="<?= esc(@$_GET['search']) ?>" class="p-2 border rounded" />
+            <select name="jk" id="filterJK" class="p-2 border rounded">
                 <option value="">Semua</option>
-                <option value="L" <?= ($_GET['jenis_kelamin'] ?? '') === "L" ? "selected" : "" ?>>Laki-laki</option>
-                <option value="P" <?= ($_GET['jenis_kelamin'] ?? '') === "P" ? "selected" : "" ?>>Perempuan</option>
+                <option value="L" <?= @$_GET['jk'] == 'L' ? 'selected' : '' ?>>Laki-laki</option>
+                <option value="P" <?= @$_GET['jk'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
             </select>
+
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">Cari</button>
         </div>
+
         <a href="<?= base_url('/admin/databalita/tambah') ?>" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">Tambah Data</a>
     </form>
 
-    
+
+
 
     <!-- Table -->
     <div class="overflow-x-auto border rounded-lg shadow">
@@ -48,7 +51,8 @@
             <tbody id="dataTable">
                 <?php foreach ($balita as $index => $row): ?>
                     <tr data-id="<?= $row['id'] ?>" class="<?= $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' ?>">
-                        <td class="border border-gray-300 px-2 py-1 text-center"><?= $index + 1 ?></td>
+                        <td class="border border-gray-300 px-2 py-1 text-center"><?= $index + 1 + ($perPage * ($currentPage - 1)) ?></td>
+
                         <td class="border border-gray-300 px-2 py-1 text-center edit-balita hover:bg-blue-100" contenteditable="true" data-field="nik_anak"><?= esc($row['nik_anak']) ?></td>
                         <td class="border border-gray-300 px-2 py-1 text-center edit-balita hover:bg-blue-100" contenteditable="true" data-field="nama_anak"><?= esc($row['nama_anak']) ?></td>
                         <td class="border border-gray-300 px-2 py-1 text-center edit-balita hover:bg-blue-100" contenteditable="true" data-field="tgl_lahir"><?= esc($row['tgl_lahir']) ?></td>
@@ -79,13 +83,13 @@
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <h2 class="text-xl font-bold mb-4 text-gray-800">Konfirmasi Arsip Data</h2>
         <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
-        <select id="kategoriArsip" class="w-full border-gray-300 rounded-md p-2 mb-4">
+        <select id="kategoriArsip" class="border p-2 w-full">
             <option value="Pindah">Pindah</option>
             <option value="Meninggal">Meninggal</option>
             <option value="Lulus">Lulus</option>
             <option value="Lainnya">Lainnya</option>
         </select>
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-end gap-2 mt-4">
             <button onclick="tutupModalArsip()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</button>
             <button id="btnArsipKonfirmasi" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md">Ya, Arsipkan</button>
         </div>
@@ -139,7 +143,7 @@
     <div class="bg-white rounded p-6 w-96 text-center">
         <h2 class="text-xl font-semibold mb-2 text-green-600"> ✅ Sukses!</h2>
         <p class="text-gray-700 mb-4">Data berhasil diperbarui dari sistem.</p>
-        
+
         <button id="closeModalSuksesUpdateBalita" class="px-4 py-2 bg-green-600 text-white rounded">OK</button>
     </div>
 </div>
@@ -388,6 +392,23 @@
                 }
             });
     });
+</script>
+<script>
+    function filterDataJK() {
+        const jk = document.getElementById('filterJK').value;
+        const keyword = document.getElementById('searchInput').value;
+
+        const url = `?jk=${jk}&keyword=${keyword}`;
+
+        fetch(url)
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.querySelector('#dataContainer').innerHTML;
+                document.getElementById('dataContainer').innerHTML = newContent;
+            });
+    }
 </script>
 
 

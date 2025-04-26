@@ -110,11 +110,11 @@
                 </a>
             </li>
 
-            <li>
+            <!-- <li>
                 <a href="<?= base_url('admin/jadwal') ?>" class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-700">
                     <i class="fas fa-print mr-3"></i> Cetak
                 </a>
-            </li>
+            </li> -->
 
             <li>
                 <a href="#" id="logoutButton" class="flex items-center px-4 py-2 rounded-lg hover:bg-red-600">

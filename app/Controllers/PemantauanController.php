@@ -29,6 +29,23 @@ class PemantauanController extends Controller
             }
         }
 
+
+        // Ambil nilai filter dari URL (misal: ntob=N)
+        $ntobFilter = $this->request->getGet('ntob');
+
+        // Jika ada filter ntob, saring data yang sesuai dengan nilai ntob
+        if ($ntobFilter) {
+            $data['pemantauan'] = array_filter($data['pemantauan'], function ($balita) use ($ntobFilter) {
+                foreach ($balita['pemantauan'] as $bulan => $pemantauanData) {
+                    // Hanya tampilkan yang sesuai dengan ntob dan bulan terbaru
+                    if (isset($pemantauanData['ntob']) && $pemantauanData['ntob'] === $ntobFilter) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
         $data['bulanTersedia'] = $bulanTersedia;
         $data['bulanKosong'] = $this->pemantauanModel->getBulanKosong();
 
@@ -53,7 +70,7 @@ class PemantauanController extends Controller
 
         $success = true;
         foreach ($json as $item) {
-            $update = [ $item->field => $item->value ];
+            $update = [$item->field => $item->value];
             $builder->where('id', $item->id)->where('bulan', $item->bulan);
             if (!$builder->update($update)) {
                 $success = false;
@@ -83,9 +100,15 @@ class PemantauanController extends Controller
 
         foreach ($balita as $b) {
             $db->table('tb_pemantauan_balita2025new')->insert([
-                'id' => $b['id'], 'bulan' => $bulanBaru,
-                'bb' => 0, 'tb' => 0, 'ntob' => '',
-                'lila' => 0, 'lk' => 0, 'vit_a' => '', 'asi' => ''
+                'id' => $b['id'],
+                'bulan' => $bulanBaru,
+                'bb' => 0,
+                'tb' => 0,
+                'ntob' => '',
+                'lila' => 0,
+                'lk' => 0,
+                'vit_a' => '',
+                'asi' => ''
             ]);
         }
 
@@ -100,7 +123,7 @@ class PemantauanController extends Controller
 
         $semuaKosong = true;
         foreach ($rows as $row) {
-            foreach (['bb','tb','ntob','lila','lk','vit_a','asi'] as $kolom) {
+            foreach (['bb', 'tb', 'ntob', 'lila', 'lk', 'vit_a', 'asi'] as $kolom) {
                 $nilai = $row[$kolom];
                 if (!is_null($nilai) && $nilai !== '' && floatval($nilai) != 0.0) {
                     $semuaKosong = false;

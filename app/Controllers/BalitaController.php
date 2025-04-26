@@ -19,20 +19,24 @@ class BalitaController extends Controller
     {
         $keyword = $this->request->getGet('search');
         $rt = $this->request->getGet('rt');
-        $perPage = 50;
-        $jenisKelamin = $this->request->getGet('jenis_kelamin');
+        $jk = $this->request->getGet('jk'); // Ambil dari dropdown
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = 20;
 
-        if ($keyword || $rt) {
-            $balitaBuilder = $this->balitaModel->search($keyword, $rt, $jenisKelamin);
-            $data['balita'] = $balitaBuilder->paginate($perPage, 'default');
+        if ($keyword || $rt || $jk) {
+            $balitaBuilder = $this->balitaModel->getDataFiltered($jk, $keyword, $rt);
+            
         } else {
             $data['balita'] = $this->balitaModel->paginate($perPage, 'default');
         }
 
         $data['pager'] = $this->balitaModel->pager;
+        $data['currentPage'] = $this->balitaModel->pager->getCurrentPage('default');  // Tambahkan baris ini
+        $data['perPage'] = $perPage; // Pastikan perPage juga dikirim
 
         return view('admin/data_balita', $data);
     }
+
 
     public function tambah()
     {

@@ -8,11 +8,11 @@
     <!-- Search & Filter -->
     <div class="mb-4 flex justify-between items-center">
         <form method="GET" id="filterForm" class="flex space-x-2">
-            <input type="text" name="search" id="search" 
-                class="border px-4 h-10 w-64 rounded" 
+            <input type="text" name="search" id="search"
+                class="border px-4 h-10 w-64 rounded"
                 placeholder="Cari Nama atau NIK..." value="<?= esc($_GET['search'] ?? '') ?>">
 
-            <select name="alamat" id="filterAlamat" 
+            <select name="alamat" id="filterAlamat"
                 class="border px-4 h-10 rounded">
                 <option value="">Semua RT</option>
                 <?php for ($i = 1; $i <= 10; $i++) : ?>
@@ -23,7 +23,7 @@
                 <?php endfor; ?>
             </select>
 
-            <select name="jenis_kelamin" id="filterJK" 
+            <select name="jenis_kelamin" id="filterJK"
                 class="border px-4 h-10 rounded">
                 <option value="">Semua</option>
                 <option value="L" <?= ($_GET['jenis_kelamin'] ?? '') === "L" ? "selected" : "" ?>>Laki-laki</option>
@@ -34,7 +34,7 @@
         </form>
 
         <!-- Tombol Tambah Data -->
-        <a href="<?= base_url('admin/tambah-usia-produktif') ?>" 
+        <a href="<?= base_url('admin/tambah-usia-produktif') ?>"
             class="bg-green-500 hover:bg-green-700 text-white px-4 h-10 rounded flex items-center">
             Tambah Data
         </a>
@@ -76,7 +76,7 @@
                                     Arsip
                                 </button>
                                 <button class="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded hapus-btn" data-id="<?= $row['id'] ?>" data-nama="<?= esc($row['nama']) ?>">Hapus</button>
-                                
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -110,7 +110,7 @@
         <h2 class="text-xl font-bold mb-4">Arsipkan Data</h2>
         <p id="infoArsip" class="mb-4"></p>
 
-        <label class="block mb-2 font-semibold">Kategori Arsip</label>
+        <p class="mb-4 text-gray-600">Pilih kategori arsip untuk data ini:</p>
         <select id="kategoriArsip" class="border p-2 w-full">
             <option value="Pindah">Pindah</option>
             <option value="Meninggal">Meninggal</option>
@@ -119,7 +119,7 @@
         </select>
 
         <div class="flex justify-end mt-4">
-            <button id="closeModal" class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded mr-2">Batal</button>
+            <button id="tutupBatal" class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded mr-2">Batal</button>
             <button id="confirmArsip" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Arsipkan</button>
         </div>
     </div>
@@ -169,11 +169,11 @@
 <!-- Modal Sukses -->
 <div id="modalSukses" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-xl font-semibold mb-2 text-green-600">✅ Sukses!</h2>
+        <h2 class="text-xl font-semibold mb-2 text-green-600">✅ Sukses!</h2>
         <p class="text-lg font-semibold">Perubahan berhasil disimpan!</p>
         <div class="mt-4 flex justify-end">
             <button id="tutupSukses" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">OK</button>
-        </div> 
+        </div>
     </div>
 </div>
 
@@ -194,7 +194,7 @@
                     alamat: this.getAttribute("data-alamat"),
                     usia: this.getAttribute("data-usia"),
                     jenis_kelamin: this.getAttribute("data-jenis-kelamin")
-                    
+
 
                 };
 
@@ -205,10 +205,11 @@
             });
         });
 
-        // Tombol "Batal"
-        document.getElementById("closeModal").addEventListener("click", function() {
+        // Menutup modal saat tombol "Batal" diklik
+        document.getElementById("tutupBatal").addEventListener("click", function() {
             document.getElementById("modalArsip").classList.add("hidden");
         });
+
 
         // Tombol "Arsipkan" (Konfirmasi)
         document.getElementById("confirmArsip").addEventListener("click", function() {

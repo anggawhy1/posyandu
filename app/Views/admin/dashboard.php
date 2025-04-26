@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <!-- Aktivitas Terbaru -->
+    <!-- Aktivitas Terbaru
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h2>
         <ul class="divide-y divide-gray-200">
@@ -46,7 +46,7 @@
                 <span class="text-gray-500 text-sm">1 Jam Lalu</span>
             </li>
         </ul>
-    </div>
+    </div> -->
 
     <!-- Data Terbaru -->
     <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
